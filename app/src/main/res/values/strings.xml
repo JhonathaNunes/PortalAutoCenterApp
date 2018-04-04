@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PortalAutoCenter</string>
+    <string name="tab_text_1">Destaques</string>
+    <string name="tab_text_2">Produtos</string>
+    <string name="tab_text_3">Serviços</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="titulo_exemplo">Exemplo Maneiro</string>
+    <string name="texto_exemplo">O vídeo fornece uma maneira poderosa de ajudá-lo a provar seu argumento. Ao clicar em Vídeo Online, você pode colar o código de inserção do vídeo que deseja adicionar. Você também pode digitar uma palavra-chave para pesquisar online o vídeo mais adequado ao seu documento.</string>
+    <string name="dinheiro">R$XXX,XX</string>
+</resources>
