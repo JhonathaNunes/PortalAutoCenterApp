@@ -1,5 +1,6 @@
 package br.com.portalautocenter.app
 
+import android.os.AsyncTask
 import android.support.design.widget.TabLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -20,7 +21,9 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.fragment_produtos.view.*
+import kotlinx.android.synthetic.main.fragment_servicos.view.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -101,15 +104,14 @@ class MainActivity : AppCompatActivity() {
                                   savedInstanceState: Bundle?): View? {
             var rootView = inflater.inflate(R.layout.fragment_main, container, false)
 
-
-            rootView.lala.text = getString(R.string.titulo_exemplo)
-
             if (arguments.getInt(ARG_SECTION_NUMBER)==2){
+
                 val adapterProduto = ProdutoAdapter(context, ArrayList<Produto>());
                 rootView = inflater.inflate(R.layout.fragment_produtos, container, false)
                 rootView.list_produtos.adapter = adapterProduto
 
                 doAsync {
+                    var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
                     val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
@@ -118,26 +120,53 @@ class MainActivity : AppCompatActivity() {
                         val jsonArray:JSONArray = JSONArray(jsonReturn)
 
                         for (i in 0..jsonArray.length() step 1) run {
-                            jsonArray.getJSONObject(i)
+                            val p:Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
+                                    jsonArray.getJSONObject(i).getDouble("preco"), jsonArray.getJSONObject(i).getString("descricao"),
+                                    jsonArray.getJSONObject(i).getInt("idSubcategoria"), jsonArray.getJSONObject(i).getInt("idMarcaProduto"),
+                                    jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"))
 
-//                            , nome, preco, descricao, idSubcategoria, idMarcaProduto, idFilial, imagem
-//                            val p:Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
-//                                    jsonArray.getJSONObject(i).g)
+                            lstProdutos.add(p)
 
                         }
                     }catch (e:Exception){
+                        Log.e("Cometeu um erro: ", e.message)
+                    }
 
+                    uiThread {
+                        adapterProduto.addAll(lstProdutos)
                     }
                 }
-                var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
-                val produto:Produto = Produto(1, "haaaaaaaaaaaaaaaa"/*getString(R.string.titulo_exemplo)*/, 15.50, getString(R.string.texto_exemplo), 1,
-                        1, 1, "imagenPlano/1.jpg")
-
-                lstProdutos.add(produto)
-                adapterProduto.addAll(lstProdutos)
 
             } else if(arguments.getInt(ARG_SECTION_NUMBER)==3){
-                rootView.lala.text = getString(R.string.texto_exemplo)
+                val adapterServico = ServicoAdapter(context, ArrayList<Servico>())
+
+                rootView = inflater.inflate(R.layout.fragment_servicos, container, false)
+                rootView.list_servicos.adapter = adapterServico
+
+                doAsync {
+                    var lstServico:ArrayList<Servico> = ArrayList<Servico>()
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/servicos/selecionar.php")
+
+                    Log.d("TAG", jsonReturn)
+
+                    try {
+                        val jsonArray:JSONArray = JSONArray(jsonReturn)
+
+                        for (i in 0..jsonArray.length() step 1){
+//                            idServico, nome, descricao, imagem
+                            val s:Servico = Servico(jsonArray.getJSONObject(i).getInt("idServico"), jsonArray.getJSONObject(i).getString("nome"),
+                                    jsonArray.getJSONObject(i).getString("descricao"), jsonArray.getJSONObject(i).getString("imagem"))
+
+                            lstServico.add(s)
+                        }
+                    }catch (e:Exception){
+                        Log.e("Erro: ", e.message)
+                    }
+
+                    uiThread {
+                        adapterServico.addAll(lstServico)
+                    }
+                }
             }
 
             return rootView
