@@ -53,7 +53,7 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
         ImageView imgProduto = (ImageView)v.findViewById(R.id.imagem_produto);
 
         //Colocando a imagem como Picasso
-        String url =    "http://10.0.2.2/inf4m/CAMINHO"+produto.getImagem();
+        String url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/cms/"+produto.getImagem();
         Picasso.with(getContext()).load(url).into(imgProduto);
 
         txtProduto.setText(produto.getNome());

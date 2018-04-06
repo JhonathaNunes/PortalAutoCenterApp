@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -19,6 +20,9 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.fragment_produtos.view.*
+import org.jetbrains.anko.doAsync
+import org.json.JSONArray
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,11 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
     }
 
@@ -108,7 +107,35 @@ class MainActivity : AppCompatActivity() {
             if (arguments.getInt(ARG_SECTION_NUMBER)==2){
                 val adapterProduto = ProdutoAdapter(context, ArrayList<Produto>());
                 rootView = inflater.inflate(R.layout.fragment_produtos, container, false)
-                rootView.list_produtos.adapter = adapterProduto;
+                rootView.list_produtos.adapter = adapterProduto
+
+                doAsync {
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
+
+                    Log.d("TAG", jsonReturn)
+
+                    try {
+                        val jsonArray:JSONArray = JSONArray(jsonReturn)
+
+                        for (i in 0..jsonArray.length() step 1) run {
+                            jsonArray.getJSONObject(i)
+
+//                            , nome, preco, descricao, idSubcategoria, idMarcaProduto, idFilial, imagem
+//                            val p:Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
+//                                    jsonArray.getJSONObject(i).g)
+
+                        }
+                    }catch (e:Exception){
+
+                    }
+                }
+                var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
+                val produto:Produto = Produto(1, "haaaaaaaaaaaaaaaa"/*getString(R.string.titulo_exemplo)*/, 15.50, getString(R.string.texto_exemplo), 1,
+                        1, 1, "imagenPlano/1.jpg")
+
+                lstProdutos.add(produto)
+                adapterProduto.addAll(lstProdutos)
+
             } else if(arguments.getInt(ARG_SECTION_NUMBER)==3){
                 rootView.lala.text = getString(R.string.texto_exemplo)
             }

@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dinheiro"
+        android:gravity="end"
         android:textAlignment="viewEnd"
         android:textColor="#000"
         android:textSize="16sp"
