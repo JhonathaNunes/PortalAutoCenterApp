@@ -1,5 +1,6 @@
 package br.com.portalautocenter.app
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.support.design.widget.TabLayout
 import android.support.design.widget.Snackbar
@@ -70,6 +71,8 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
 
         if (id == R.id.action_settings) {
+            val intent = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(intent)
             return true
         }
 
@@ -112,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
                 doAsync {
                     var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
-                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/portal/api/produtos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 
@@ -145,7 +148,7 @@ class MainActivity : AppCompatActivity() {
 
                 doAsync {
                     var lstServico:ArrayList<Servico> = ArrayList<Servico>()
-                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/servicos/selecionar.php")
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/portal/api/servicos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 
