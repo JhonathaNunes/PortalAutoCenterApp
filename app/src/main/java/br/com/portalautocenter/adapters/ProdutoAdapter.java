@@ -1,4 +1,4 @@
-package br.com.portalautocenter.app;
+package br.com.portalautocenter.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,6 +16,9 @@ import com.squareup.picasso.Picasso;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import br.com.portalautocenter.app.R;
+import br.com.portalautocenter.models.Produto;
 
 /**
  * Created by 16254855 on 04/04/2018.

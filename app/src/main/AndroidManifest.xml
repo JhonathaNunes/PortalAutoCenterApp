@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CadastroUsuarioActivity" />
+        <activity android:name=".PerfilActivity"></activity>
     </application>
 
 </manifest>

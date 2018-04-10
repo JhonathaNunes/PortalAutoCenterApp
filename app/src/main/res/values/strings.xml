@@ -10,5 +10,10 @@
     <string name="dinheiro">R$XXX,XX</string>
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
+    <string name="nome">Nome</string>
+    <string name="cpf">CPF</string>
+    <string name="email">E-mail</string>
     <string name="cadastro">Cadastre-se</string>
+    <string name="erroVazio">Este campo não pode ser vazio!</string>
+    <string name="formatoSenhaIncorreto">A senha deve ter no mínimo 8 caractéres, sendo no mínimo um caracter maiúsculo e contendo um número</string>
 </resources>

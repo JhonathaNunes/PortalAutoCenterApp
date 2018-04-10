@@ -1,15 +1,12 @@
 package br.com.portalautocenter.app
 
 import android.content.Intent
-import android.os.AsyncTask
 import android.support.design.widget.TabLayout
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,16 +14,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import br.com.portalautocenter.adapters.ProdutoAdapter
+import br.com.portalautocenter.adapters.ServicoAdapter
+import br.com.portalautocenter.models.Produto
+import br.com.portalautocenter.models.Servico
+import br.com.portalautocenter.utils.HttpConnection
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.fragment_produtos.view.*
 import kotlinx.android.synthetic.main.fragment_servicos.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -72,6 +71,10 @@ class MainActivity : AppCompatActivity() {
 
         if (id == R.id.action_settings) {
             val intent = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+            return true
+        } else if (id == R.id.action_perfil){
+            val intent = Intent(applicationContext, PerfilActivity::class.java)
             startActivity(intent)
             return true
         }
@@ -123,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                         val jsonArray:JSONArray = JSONArray(jsonReturn)
 
                         for (i in 0..jsonArray.length() step 1) run {
-                            val p:Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
+                            val p: Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
                                     jsonArray.getJSONObject(i).getDouble("preco"), jsonArray.getJSONObject(i).getString("descricao"),
                                     jsonArray.getJSONObject(i).getInt("idSubcategoria"), jsonArray.getJSONObject(i).getInt("idMarcaProduto"),
                                     jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"))
@@ -157,7 +160,7 @@ class MainActivity : AppCompatActivity() {
 
                         for (i in 0..jsonArray.length() step 1){
 //                            idServico, nome, descricao, imagem
-                            val s:Servico = Servico(jsonArray.getJSONObject(i).getInt("idServico"), jsonArray.getJSONObject(i).getString("nome"),
+                            val s: Servico = Servico(jsonArray.getJSONObject(i).getInt("idServico"), jsonArray.getJSONObject(i).getString("nome"),
                                     jsonArray.getJSONObject(i).getString("descricao"), jsonArray.getJSONObject(i).getString("imagem"))
 
                             lstServico.add(s)

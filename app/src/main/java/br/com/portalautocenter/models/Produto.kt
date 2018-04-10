@@ -1,4 +1,4 @@
-package br.com.portalautocenter.app
+package br.com.portalautocenter.models
 
 /**
  * Created by 16254855 on 04/04/2018.

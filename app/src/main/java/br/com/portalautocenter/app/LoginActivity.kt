@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.view.MenuItem
+import br.com.portalautocenter.utils.HttpConnection
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
@@ -42,6 +43,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        txt_cadastro.setOnClickListener {
+            val intent = Intent(applicationContext, CadastroUsuarioActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -39,4 +39,7 @@ dependencies {
 
     //Picasso
     compile files('libs/picasso-2.5.2.jar')
+
+    //Circle imageview
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
