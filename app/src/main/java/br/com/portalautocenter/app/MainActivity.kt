@@ -1,6 +1,8 @@
 package br.com.portalautocenter.app
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 
@@ -8,9 +10,11 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +30,10 @@ import kotlinx.android.synthetic.main.fragment_servicos.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -43,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val usuario = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
+
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -54,32 +62,61 @@ class MainActivity : AppCompatActivity() {
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
 
-    }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+//Abri o navigation Drawer
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-        if (id == R.id.action_settings) {
-            val intent = Intent(applicationContext, LoginActivity::class.java)
-            startActivity(intent)
-            return true
-        } else if (id == R.id.action_perfil){
-            val intent = Intent(applicationContext, PerfilActivity::class.java)
-            startActivity(intent)
-            return true
+        if (usuario.getBoolean("STATUS", false)){
+            nav_view.inflateMenu(R.menu.menu_logado)
+        }else{
+            nav_view.inflateMenu(R.menu.menu_padrao)
         }
 
-        return super.onOptionsItemSelected(item)
+        nav_view.setNavigationItemSelectedListener(this)
+
+    }
+
+    //Navigation Drawer
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+
+        when (item.itemId) {
+            R.id.nav_login -> {
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_perfli -> {
+                val intent = Intent(applicationContext, PerfilActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_abastecimento -> {
+
+            }
+            R.id.nav_pedidos -> {
+
+            }
+            R.id.nav_carrinho -> {
+
+            }
+            R.id.nav_logout -> {
+                //SharedPreferences.Editor().
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 
 
@@ -159,7 +196,6 @@ class MainActivity : AppCompatActivity() {
                         val jsonArray:JSONArray = JSONArray(jsonReturn)
 
                         for (i in 0..jsonArray.length() step 1){
-//                            idServico, nome, descricao, imagem
                             val s: Servico = Servico(jsonArray.getJSONObject(i).getInt("idServico"), jsonArray.getJSONObject(i).getString("nome"),
                                     jsonArray.getJSONObject(i).getString("descricao"), jsonArray.getJSONObject(i).getString("imagem"))
 

@@ -1,9 +1,12 @@
 package br.com.portalautocenter.app
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.MenuItem
+import br.com.portalautocenter.models.Usuario
 import br.com.portalautocenter.utils.HttpConnection
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.doAsync
@@ -15,11 +18,14 @@ import org.json.JSONObject
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val preferences = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
+
 
         btn_login.setOnClickListener {
             val usuario = txt_usuario.text.toString()
@@ -37,8 +43,9 @@ class LoginActivity : AppCompatActivity() {
                     val login_state = retorno.getBoolean("sucesso")
                     if (login_state == true){
                         val usuario = retorno.getJSONObject("usuario")
-                        val nome = usuario.getString("nome")
-                        toast("Usuario $nome logado com sucesso")
+                        preferences.edit().putString("USUARIO", usuario.toString()).apply()
+                        preferences.edit().putBoolean("STATUS", true).apply()
+                        toast("TA LOGADO OTARIO")
                         finish()
                     }
                 }
@@ -46,8 +53,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         txt_cadastro.setOnClickListener {
-            val intent = Intent(applicationContext, CadastroUsuarioActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 
@@ -55,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         when (item.getItemId()) {
             android.R.id.home
             -> {
-                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             else -> {

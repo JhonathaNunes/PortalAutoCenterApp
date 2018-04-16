@@ -16,4 +16,8 @@
     <string name="cadastro">Cadastre-se</string>
     <string name="erroVazio">Este campo não pode ser vazio!</string>
     <string name="formatoSenhaIncorreto">A senha deve ter no mínimo 8 caractéres, sendo no mínimo um caracter maiúsculo e contendo um número</string>
+    <string name="editar">Editar</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

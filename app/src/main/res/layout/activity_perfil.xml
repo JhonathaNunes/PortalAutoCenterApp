@@ -1,31 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="br.com.portalautocenter.app.PerfilActivity"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_gravity="center">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="br.com.portalautocenter.app.PerfilActivity"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:src="@drawable/sample_1"/>
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btn_compra"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/sample_1"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_compra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:tint="@android:color/background_light"
+                app:backgroundTint="@color/colorAccent"
+                app:srcCompat="@drawable/edit" />
+        </android.support.design.widget.CoordinatorLayout>
+
+        <TextView
+            android:id="@+id/txt_nome"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome"
+            android:textSize="14sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/txt_cpf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cpf"
+            android:textSize="14sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="14sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/txt_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/usuario"
+            android:textSize="14sp"
+            android:textColor="#000"/>
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:tint="#FFF"
-            app:srcCompat="@android:drawable/ic_input_add" />
-    </android.support.design.widget.CoordinatorLayout>
+            android:text="@string/editar"
+            android:textColor="#fff"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_gravity="end"/>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Veículos"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginTop="15dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+ </ScrollView>
