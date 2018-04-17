@@ -32,6 +32,10 @@ import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import org.jetbrains.anko.toast
+import android.preference.PreferenceManager
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -49,8 +53,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val usuario = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
-
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -58,6 +60,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
+
+        val usuario = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
@@ -94,6 +98,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (item.itemId) {
             R.id.nav_login -> {
+                //Refresh na activity
+                finish()
+                startActivity(getIntent())
+                //Abre a tela de login
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
             }
@@ -111,7 +119,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_logout -> {
-                //SharedPreferences.Editor().
+                deletarSharedPreferences()
+                //Refresh na activity
+                finish()
+                startActivity(getIntent())
+
             }
         }
 
@@ -155,7 +167,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 doAsync {
                     var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
-                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/portal/api/produtos/selecionar.php")
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 
@@ -188,7 +200,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 doAsync {
                     var lstServico:ArrayList<Servico> = ArrayList<Servico>()
-                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/portal/api/servicos/selecionar.php")
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/servicos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 
@@ -233,5 +245,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 return fragment
             }
         }
+    }
+
+    fun deletarSharedPreferences() {
+        val pref = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
+        pref.edit().clear().apply()
     }
 }

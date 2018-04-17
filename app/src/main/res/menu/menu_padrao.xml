@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_login"
-            android:icon="@android:drawable/ic_dialog_map"
+            android:icon="@drawable/if_padlockclosed_49855"
             android:title="Login" />
     </group>
 </menu>

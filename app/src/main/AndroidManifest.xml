@@ -33,6 +33,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.portalautocenter.app.MainActivity" />
         </activity>
+        <activity
+            android:name=".AbastecimentoActivity"
+            android:label="@string/title_activity_abastecimento"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ControleAbastecimentoActivity"
+            android:label="@string/title_activity_controle_abastecimento"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.MainActivity" />
+        </activity>
+        <activity
+            android:name=".VisualizarAbastecimentoActivity"
+            android:label="@string/title_activity_visualizar_abastecimento"
+            android:parentActivityName=".ControleAbastecimentoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.ControleAbastecimentoActivity" />
+        </activity>
     </application>
 
 </manifest>

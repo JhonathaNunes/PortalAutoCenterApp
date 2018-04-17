@@ -18,6 +18,7 @@ import org.json.JSONObject
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        deletarSharedPreferences()
         val preferences = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
 
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             val senha = txt_senha.text.toString()
 
             doAsync {
-                val url ="http://10.0.2.2/inf4m/portal/api/usuario/login.php"
+                val url ="http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/login.php"
 
                 val map:HashMap<String, String> = hashMapOf("usuario" to usuario, "senha" to senha)
 
@@ -45,8 +46,10 @@ class LoginActivity : AppCompatActivity() {
                         val usuario = retorno.getJSONObject("usuario")
                         preferences.edit().putString("USUARIO", usuario.toString()).apply()
                         preferences.edit().putBoolean("STATUS", true).apply()
-                        toast("TA LOGADO OTARIO")
                         finish()
+                    }else{
+                        limparTextos()
+                        toast("Usuario ou senha incorretos")
                     }
                 }
             }
@@ -67,5 +70,15 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    fun limparTextos(){
+        txt_usuario.setText("")
+        txt_senha.setText("")
+    }
+
+    fun deletarSharedPreferences() {
+        val pref = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
+        pref.edit().clear().apply()
     }
 }

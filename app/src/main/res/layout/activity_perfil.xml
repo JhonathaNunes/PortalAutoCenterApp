@@ -31,7 +31,7 @@
                 android:layout_gravity="bottom|end"
                 android:tint="@android:color/background_light"
                 app:backgroundTint="@color/colorAccent"
-                app:srcCompat="@drawable/edit" />
+                app:srcCompat="@drawable/ic_mode_edit_black_24dp" />
         </android.support.design.widget.CoordinatorLayout>
 
         <TextView

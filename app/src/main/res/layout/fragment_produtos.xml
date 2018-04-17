@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:tint="#FFF"
-            app:srcCompat="@drawable/shopping_chart" />
+            app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp" />
     </android.support.design.widget.CoordinatorLayout>
 
 </android.support.constraint.ConstraintLayout>

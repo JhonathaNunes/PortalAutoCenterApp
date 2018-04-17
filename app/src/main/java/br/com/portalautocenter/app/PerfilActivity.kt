@@ -20,7 +20,7 @@ class PerfilActivity : AppCompatActivity() {
         val usuario = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
 
         if (usuario.getBoolean("STATUS", false)){
-            preencheCampos(usuario.getString("USUARIO", "batata"))
+            preencheCampos(usuario.getString("USUARIO", "NoUser"))
         }
 
     }
@@ -44,7 +44,7 @@ class PerfilActivity : AppCompatActivity() {
         txt_cpf.setText(usuario.getString("cpf"))
         txt_email.setText(usuario.getString("email"))
         txt_usuario.setText(usuario.getString("usuario"))
-        val url = "http://10.0.2.2/inf4m/Portal/"+usuario.getString("fotoUser")
+        val url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
         Picasso.with(applicationContext).load(url).into(profile_image)
     }
 }
