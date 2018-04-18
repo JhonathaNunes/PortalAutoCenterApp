@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import br.com.portalautocenter.app.R;
 import br.com.portalautocenter.models.Produto;
+import br.com.portalautocenter.utils.ConvetBrasilKt;
 
 /**
  * Created by 16254855 on 04/04/2018.
@@ -47,11 +48,7 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
 
         double precoProduto = produto.getPreco();
 
-        //Converte para real
-        Locale brasil = new Locale("pt", "BR");
-        NumberFormat nf = NumberFormat.getCurrencyInstance(brasil);
-
-        String preco = nf.format(precoProduto);
+        String preco = ConvetBrasilKt.converteParaReal(precoProduto);
 
         ImageView imgProduto = (ImageView)v.findViewById(R.id.imagem_produto);
 

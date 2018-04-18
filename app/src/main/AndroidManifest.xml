@@ -43,7 +43,7 @@
                 android:value="br.com.portalautocenter.app.MainActivity" />
         </activity>
         <activity
-            android:name=".ControleAbastecimentoActivity"
+            android:name=".EscolhaCarroAbastecimentoActivity"
             android:label="@string/title_activity_controle_abastecimento"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -54,11 +54,29 @@
         <activity
             android:name=".VisualizarAbastecimentoActivity"
             android:label="@string/title_activity_visualizar_abastecimento"
-            android:parentActivityName=".ControleAbastecimentoActivity"
+            android:parentActivityName=".EscolhaCarroAbastecimentoActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.portalautocenter.app.ControleAbastecimentoActivity" />
+                android:value="br.com.portalautocenter.app.EscolhaCarroAbastecimentoActivity" />
+        </activity>
+        <activity
+            android:name=".CarrosAbastecimentoActivity"
+            android:label="@string/title_activity_carros_abastecimento"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ControleAbastecimentoActivity"
+            android:label="@string/title_activity_controle_abastecimento"
+            android:parentActivityName=".CarrosAbastecimentoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.CarrosAbastecimentoActivity" />
         </activity>
     </application>
 

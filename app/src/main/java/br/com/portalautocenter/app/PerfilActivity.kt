@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import br.com.portalautocenter.models.Produto
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_perfil.*
 import org.json.JSONObject

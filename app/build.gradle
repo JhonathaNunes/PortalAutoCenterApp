@@ -42,4 +42,7 @@ dependencies {
 
     //Circle imageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Biblioteca de gráfico
+    //implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }

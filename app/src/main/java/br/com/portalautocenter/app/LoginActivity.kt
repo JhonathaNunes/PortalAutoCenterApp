@@ -18,7 +18,6 @@ import org.json.JSONObject
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        deletarSharedPreferences()
         val preferences = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
 
         super.onCreate(savedInstanceState)

@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:tint="#fff"
-        app:srcCompat="@drawable/pistola" />
+        app:srcCompat="@drawable/pistola"
+        android:tint="#fff"/>
 
 </android.support.design.widget.CoordinatorLayout>
