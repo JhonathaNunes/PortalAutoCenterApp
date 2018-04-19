@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import br.com.portalautocenter.app.R;
 import br.com.portalautocenter.models.Veiculo;
-import br.com.portalautocenter.utils.ImagemVeiculoKt;
 
 /**
  * Created by 16254855 on 18/04/2018.
@@ -43,9 +42,11 @@ public class VeiculosAbastecimentoAdapter extends ArrayAdapter<Veiculo> {
         TextView txtPlaca = (TextView)v.findViewById(R.id.txt_placa);
         ImageView imgCarro = (ImageView)v.findViewById(R.id.car_img);
 
+
+
         //Colocando a imagem como Picasso
-        String url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+ ImagemVeiculoKt.pegarImagem(veiculo.getIdVeiculo());
-       Picasso.with(getContext()).load(url).into(imgCarro);
+        String url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+ veiculo.getFoto();
+        Picasso.with(getContext()).load(url).into(imgCarro);
 
         txtModelo.setText(veiculo.getModelo());
         txtPlaca.setText(veiculo.getPlaca());

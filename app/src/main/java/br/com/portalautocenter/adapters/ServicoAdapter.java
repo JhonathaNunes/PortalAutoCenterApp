@@ -40,7 +40,6 @@ public class ServicoAdapter extends ArrayAdapter<Servico>{
 
         //Declaração dos objetos do Layout
         TextView txtServico = (TextView)v.findViewById(R.id.txt_servico);
-        TextView txtDesc = (TextView)v.findViewById(R.id.txt_desc);
 
         ImageView imgServico = (ImageView)v.findViewById(R.id.imagem_servico);
 
@@ -49,7 +48,6 @@ public class ServicoAdapter extends ArrayAdapter<Servico>{
         Picasso.with(getContext()).load(url).into(imgServico);
 
         txtServico.setText(servico.getNome());
-        txtDesc.setText(servico.getDescricao());
 
         return v;
     }

@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -24,42 +25,6 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroUsuarioActivity" />
         <activity android:name=".PerfilActivity" />
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.portalautocenter.app.MainActivity" />
-        </activity>
-        <activity
-            android:name=".AbastecimentoActivity"
-            android:label="@string/title_activity_abastecimento"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.portalautocenter.app.MainActivity" />
-        </activity>
-        <activity
-            android:name=".EscolhaCarroAbastecimentoActivity"
-            android:label="@string/title_activity_controle_abastecimento"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.portalautocenter.app.MainActivity" />
-        </activity>
-        <activity
-            android:name=".VisualizarAbastecimentoActivity"
-            android:label="@string/title_activity_visualizar_abastecimento"
-            android:parentActivityName=".EscolhaCarroAbastecimentoActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.portalautocenter.app.EscolhaCarroAbastecimentoActivity" />
-        </activity>
         <activity
             android:name=".CarrosAbastecimentoActivity"
             android:label="@string/title_activity_carros_abastecimento"
@@ -78,6 +43,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.portalautocenter.app.CarrosAbastecimentoActivity" />
         </activity>
+
     </application>
 
 </manifest>

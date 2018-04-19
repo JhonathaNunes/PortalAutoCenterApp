@@ -1,10 +1,12 @@
 package br.com.portalautocenter.app
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.AdapterView
 import br.com.portalautocenter.adapters.VeiculosAbastecimentoAdapter
 import br.com.portalautocenter.models.Produto
 import br.com.portalautocenter.models.Veiculo
@@ -13,6 +15,7 @@ import br.com.portalautocenter.utils.HttpConnection
 import kotlinx.android.synthetic.main.activity_carros_abastecimento.*
 import kotlinx.android.synthetic.main.content_carros_abastecimento.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import org.json.JSONObject
@@ -47,7 +50,8 @@ class CarrosAbastecimentoActivity : AppCompatActivity() {
                 for (i in 0..jsonArray.length() step 1) run {
                     val v = Veiculo(jsonArray.getJSONObject(i).getInt("idVeiculo"), jsonArray.getJSONObject(i).getString("placa"), jsonArray.getJSONObject(i).getString("ano"),
                             jsonArray.getJSONObject(i).getString("cor"), jsonArray.getJSONObject(i).getInt("idModelo"), jsonArray.getJSONObject(i).getInt("idUsuario"),
-                            jsonArray.getJSONObject(i).getString("acessorios"), jsonArray.getJSONObject(i).getString("modelo"), jsonArray.getJSONObject(i).getString("marca"))
+                            jsonArray.getJSONObject(i).getString("acessorios"), jsonArray.getJSONObject(i).getString("modelo"), jsonArray.getJSONObject(i).getString("marca"),
+                            jsonArray.getJSONObject(i).getString("foto"))
 
                     listVeiculos.add(v)
 
@@ -60,6 +64,16 @@ class CarrosAbastecimentoActivity : AppCompatActivity() {
                 adapter.addAll(listVeiculos)
             }
         }
-    }
 
+        list_carro.setOnItemClickListener { adapterView, view, i, l ->
+            val v = adapter.getItem(i)
+
+            val intent = Intent(applicationContext, ControleAbastecimentoActivity::class.java)
+
+            intent.putExtra("idUsuario", v.idUsuario)
+            intent.putExtra("idVeiculo", v.idVeiculo)
+
+            startActivity(intent)
+        }
+    }
 }
