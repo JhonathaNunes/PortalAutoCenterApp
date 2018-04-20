@@ -70,8 +70,10 @@ class CarrosAbastecimentoActivity : AppCompatActivity() {
 
             val intent = Intent(applicationContext, ControleAbastecimentoActivity::class.java)
 
-            intent.putExtra("idUsuario", v.idUsuario)
-            intent.putExtra("idVeiculo", v.idVeiculo)
+
+            val pref = getSharedPreferences("Veiculo", Context.MODE_PRIVATE)
+            pref.edit().putInt("idUsuario", v.idUsuario).apply()
+            pref.edit().putInt("idVeiculo", v.idVeiculo).apply()
 
             startActivity(intent)
         }

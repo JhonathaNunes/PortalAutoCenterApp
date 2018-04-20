@@ -10,6 +10,6 @@ import br.com.portalautocenter.models.Abastecimento;
  */
 
 @Database(entities = {Abastecimento.class}, version = 1)
-public abstract class AppDatabasse extends RoomDatabase {
-    public abstract Abastecimento abastecimentoDao();
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract AbastecimentoDao abastecimentoDao();
 }

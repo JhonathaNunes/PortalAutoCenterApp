@@ -23,7 +23,9 @@
     <string name="title_activity_abastecimento">AbastecimentoActivity</string>
     <string name="modelo_carro">Ford Mustang 3.7 V6</string>
     <string name="placa_carro">ABC-1234</string>
-    <string name="title_activity_controle_abastecimento">Controle Abastecimento</string>
-    <string name="title_activity_visualizar_abastecimento">VisualizarAbastecimentoActivity</string>
+    <string name="title_activity_controle_abastecimento">Controle de Abastecimento</string>
+    <string name="title_activity_visualizar_abastecimento">Visualizar Abastecimentos</string>
     <string name="title_activity_carros_abastecimento">Selecione um Veículo</string>
+    <string name="title_activity_inserir_abastecimento">Registrar Abastecimento</string>
+    <string name="DATABASE_NAME">abastecimento</string>
 </resources>

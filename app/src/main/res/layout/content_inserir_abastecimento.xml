@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    tools:context="br.com.portalautocenter.app.InserirAbastecimentoActivity"
+    tools:showIn="@layout/activity_inserir_abastecimento"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/txt_preco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor Abastecido"/>
+
+    <EditText
+        android:id="@+id/txt_litros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Litros abastecidos"/>
+
+    <EditText
+        android:id="@+id/txt_tanque"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Litros no Tanque "/>
+
+    <EditText
+        android:id="@+id/txt_rede"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Rede"/>
+
+    <Button
+        android:id="@+id/btn_inserir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adcionar"
+        android:textColor="#fff"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

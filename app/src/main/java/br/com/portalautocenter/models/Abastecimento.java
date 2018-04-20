@@ -37,7 +37,13 @@ public class Abastecimento {
     @ColumnInfo(name = "preco")
     private Double preco;
 
-    public Abastecimento(int id, int idUsuario, int idVeiculo, String posto, String latitude, String longitude, String data, Double litros, Double preco) {
+    @ColumnInfo(name = "tanque")
+    private Double tanque;
+
+    public Abastecimento() {
+    }
+
+    public Abastecimento(int idUsuario, int idVeiculo, String posto, String latitude, String longitude, String data, Double litros, Double preco, Double tanque) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idVeiculo = idVeiculo;
@@ -81,11 +87,11 @@ public class Abastecimento {
         this.posto = posto;
     }
 
-    public String getLatidude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatidude(String latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
@@ -119,5 +125,13 @@ public class Abastecimento {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Double getTanque() {
+        return tanque;
+    }
+
+    public void setTanque(Double tanque) {
+        this.tanque = tanque;
     }
 }

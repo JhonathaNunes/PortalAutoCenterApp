@@ -7,7 +7,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.com.portalautocenter.app.ControleAbastecimentoActivity"
     tools:showIn="@layout/activity_controle_abastecimento"
-    android:padding="16dp" android:orientation="vertical">
+    android:padding="16dp"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
