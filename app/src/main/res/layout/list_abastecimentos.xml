@@ -4,6 +4,7 @@
     android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
 
     <TextView
+        android:id="@+id/txt_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10/10/2000"
@@ -55,6 +56,7 @@
             android:text="Abastecido:"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/txt_abastecido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="21,6L"/>

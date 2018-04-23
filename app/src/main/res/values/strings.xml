@@ -28,4 +28,5 @@
     <string name="title_activity_carros_abastecimento">Selecione um Veículo</string>
     <string name="title_activity_inserir_abastecimento">Registrar Abastecimento</string>
     <string name="DATABASE_NAME">abastecimento</string>
+    <string name="insert_abastecimento">Abastecimento adcionado com sucesso</string>
 </resources>
