@@ -1,5 +1,6 @@
 package br.com.portalautocenter.app
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -34,11 +35,18 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.toast
 import android.preference.PreferenceManager
+import android.support.v4.app.ActivityCompat
+import br.com.portalautocenter.adapters.PrestadoraAdapter
+import br.com.portalautocenter.adapters.ProdutosDestaqueAdapter
+import br.com.portalautocenter.models.Prestadora
+import br.com.portalautocenter.utils.PegaLocalizacao
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
-
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -79,7 +87,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         nav_view.setNavigationItemSelectedListener(this)
-
     }
 
     //Navigation Drawer
@@ -157,6 +164,67 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
             var rootView = inflater.inflate(R.layout.fragment_main, container, false)
+
+            /*Preencher Carousel de prestadora*/
+
+            val view_prestadora = rootView.view_prestadora
+            val produtos = rootView.view_produtos
+
+            doAsync {
+                var lstPrestadora:ArrayList<Prestadora> = ArrayList<Prestadora>()
+                val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/prestadora/selecionar.php")
+
+                Log.d("TAG", jsonReturn)
+
+                try {
+                    val jsonArray:JSONArray = JSONArray(jsonReturn)
+
+                    for (i in 0..jsonArray.length() step 1) run {
+                        val p: Prestadora = Prestadora(jsonArray.getJSONObject(i).getInt("idPrestadora"), jsonArray.getJSONObject(i).getString("nomeFantasia"), jsonArray.getJSONObject(i).getString("fotoPrestadora"),
+                                jsonArray.getJSONObject(i).getString("descricao"), jsonArray.getJSONObject(i).getString("telefone"), jsonArray.getJSONObject(i).getString("logradouro"),
+                                jsonArray.getJSONObject(i).getString("numero"), jsonArray.getJSONObject(i).getString("bairro"), jsonArray.getJSONObject(i).getString("referencia"),
+                                jsonArray.getJSONObject(i).getString("cep"), jsonArray.getJSONObject(i).getString("cidade"), jsonArray.getJSONObject(i).getString("estado"))
+
+                        lstPrestadora.add(p)
+
+                    }
+                    }catch (e:Exception) {
+                        Log.e("Cometeu um erro: ", e.message)
+                    }
+                uiThread {
+                    val customAdapter = PrestadoraAdapter(context, lstPrestadora)
+                    view_prestadora.adapter = customAdapter
+                }
+
+                /*Preencher Carousel de Produtos*/
+                doAsync {
+                    var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
+                    val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
+
+                    Log.d("TAG", jsonReturn)
+
+                    try {
+                        val jsonArray:JSONArray = JSONArray(jsonReturn)
+
+                        for (i in 0..jsonArray.length() step 1) run {
+                            val p: Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
+                                    jsonArray.getJSONObject(i).getDouble("preco"), jsonArray.getJSONObject(i).getString("descricao"),
+                                    jsonArray.getJSONObject(i).getInt("idSubcategoria"), jsonArray.getJSONObject(i).getInt("idMarcaProduto"),
+                                    jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"))
+
+                            lstProdutos.add(p)
+
+                        }
+                    }catch (e:Exception){
+                        Log.e("Cometeu um erro: ", e.message)
+                    }
+
+                    uiThread {
+                        val produtoAdapter = ProdutosDestaqueAdapter(context, lstProdutos)
+                        produtos.adapter = produtoAdapter
+                    }
+                }
+            }
 
             if (arguments.getInt(ARG_SECTION_NUMBER)==2){
 
@@ -249,5 +317,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun deletarSharedPreferences() {
         val pref = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
         pref.edit().clear().apply()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        pararConexao()
+    }
+
+    fun pararConexao(){
+
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        pararConexao()
+    }
+
+    override fun onConnected(p0: Bundle?) {
+
     }
 }

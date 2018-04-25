@@ -5,21 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="br.com.portalautocenter.app.MainActivity$PlaceholderFragment"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:padding="16dp"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prestadoras"
-        android:textStyle="bold"
+        android:text="Melhores Prestadoras"
+        android:textSize="16sp"
         android:textColor="#000"
-        android:textSize="20sp"/>
+        android:textStyle="bold"
+        android:gravity="center_vertical"/>
 
-    <ListView
-        android:id="@+id/list_prestadora"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_prestadora"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="250dp">
-    </ListView>
+        android:layout_gravity="center"
+        android:layout_height="205dp">
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Produtos Mais Vendidos"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:gravity="center_vertical"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_produtos"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="205dp">
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

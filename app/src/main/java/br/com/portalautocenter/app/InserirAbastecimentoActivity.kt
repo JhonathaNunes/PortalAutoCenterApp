@@ -30,39 +30,13 @@ class InserirAbastecimentoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_inserir_abastecimento)
         setSupportActionBar(toolbar)
 
-        val locationManager = getSystemService(Context.LOCATION_SERVICE)
-
         val pref = getSharedPreferences("Veiculo", Context.MODE_PRIVATE)
         val idU = pref.getInt("idUsuario", 0)
         val idV = pref.getInt("idVeiculo", 0)
-        var latitude = ""
-        var longitude = ""
 
         val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, getString(R.string.DATABASE_NAME)).allowMainThreadQueries().build()
 
         btn_inserir.setOnClickListener {
-            /*Pegar latitude e longitude*/
-            while (true){
-                val listener = object : LocationListener {
-                    override fun onLocationChanged(location: Location) {
-                        latitude = location.getLatitude().toString()
-                        longitude = location.getLongitude().toString()
-                    }
-
-                    override fun onStatusChanged(s: String, i: Int, bundle: Bundle) {
-
-                    }
-
-                    override fun onProviderEnabled(s: String) {
-
-                    }
-
-                    override fun onProviderDisabled(s: String) {
-
-                    }
-                }
-                break
-            }
 
             val litros = txt_litros.text.toString().replace(",", ".").toDouble()
             val preco = txt_preco.text.toString().replace(",", ".").toDouble()
