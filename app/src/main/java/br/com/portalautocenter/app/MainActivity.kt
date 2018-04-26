@@ -40,13 +40,11 @@ import br.com.portalautocenter.adapters.PrestadoraAdapter
 import br.com.portalautocenter.adapters.ProdutosDestaqueAdapter
 import br.com.portalautocenter.models.Prestadora
 import br.com.portalautocenter.utils.PegaLocalizacao
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -317,26 +315,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun deletarSharedPreferences() {
         val pref = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
         pref.edit().clear().apply()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        pararConexao()
-    }
-
-    fun pararConexao(){
-
-    }
-
-    override fun onConnectionSuspended(p0: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        pararConexao()
-    }
-
-    override fun onConnected(p0: Bundle?) {
-
     }
 }

@@ -90,5 +90,13 @@
             android:layout_height="2dp"
             android:background="@color/colorAccent"/>
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_veiculos"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="205dp">
+        </android.support.v4.view.ViewPager>
+
     </LinearLayout>
  </ScrollView>

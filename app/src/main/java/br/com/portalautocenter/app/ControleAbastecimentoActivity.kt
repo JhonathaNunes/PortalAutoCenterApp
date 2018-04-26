@@ -1,6 +1,7 @@
 package br.com.portalautocenter.app
 
 import android.arch.persistence.room.Room
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -32,6 +33,7 @@ class ControleAbastecimentoActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+        val veiculo = getSharedPreferences("Veiculo", Context.MODE_PRIVATE)
 
         val adapter = AbastecimentoAdapter(applicationContext, ArrayList<Abastecimento>())
 
@@ -39,7 +41,7 @@ class ControleAbastecimentoActivity : AppCompatActivity() {
 
         val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, getString(R.string.DATABASE_NAME)).allowMainThreadQueries().build()
 
-        val list_abastecimentos = db.abastecimentoDao().all
+        val list_abastecimentos = db.abastecimentoDao().getByUser(veiculo.getInt("idUsuario", 0), veiculo.getInt("idVeiculo", 0))
 
         adapter.addAll(list_abastecimentos)
 
