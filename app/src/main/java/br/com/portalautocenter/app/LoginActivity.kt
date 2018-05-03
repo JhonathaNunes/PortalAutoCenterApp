@@ -55,7 +55,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         txt_cadastro.setOnClickListener {
-            finish()
+            val intent = Intent(applicationContext, CadastroUsuarioActivity::class.java)
+            startActivity(intent)
         }
     }
 

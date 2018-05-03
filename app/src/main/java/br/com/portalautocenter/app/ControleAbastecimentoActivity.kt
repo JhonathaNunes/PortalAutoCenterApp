@@ -20,8 +20,6 @@ class ControleAbastecimentoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_controle_abastecimento)
         setSupportActionBar(toolbar)
 
-
-
         btn_inserir.setOnClickListener {
             val intent = Intent(applicationContext, InserirAbastecimentoActivity::class.java)
             startActivity(intent)

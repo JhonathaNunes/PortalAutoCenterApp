@@ -10,11 +10,10 @@
     android:padding="16dp"
     android:orientation="vertical">
 
-    <ImageView
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/graf_abastecimento"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/graphic_sample"
-        />
+        android:layout_height="200dp"></com.github.mikephil.charting.charts.LineChart>
 
     <TextView
         android:layout_width="match_parent"
