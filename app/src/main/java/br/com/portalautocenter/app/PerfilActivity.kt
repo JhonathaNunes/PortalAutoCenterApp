@@ -51,12 +51,12 @@ class PerfilActivity : AppCompatActivity() {
         txt_cpf.setText(usuario.getString("cpf"))
         txt_email.setText(usuario.getString("email"))
         txt_usuario.setText(usuario.getString("usuario"))
-        val url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
+        val url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
         Picasso.with(applicationContext).load(url).into(profile_image)
 
         doAsync {
             val listVeiculos = ArrayList<Veiculo>()
-            val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" + usuario.getInt("idUsuario"))
+            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" + usuario.getInt("idUsuario"))
 
             Log.d("TAG", jsonReturn)
 

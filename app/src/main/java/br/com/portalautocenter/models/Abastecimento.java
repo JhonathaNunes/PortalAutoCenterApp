@@ -41,10 +41,10 @@ public class Abastecimento {
     private Double tanque;
 
     public Abastecimento() {
+
     }
 
     public Abastecimento(int idUsuario, int idVeiculo, String posto, String latitude, String longitude, String data, Double litros, Double preco, Double tanque) {
-        this.id = id;
         this.idUsuario = idUsuario;
         this.idVeiculo = idVeiculo;
         this.posto = posto;
@@ -53,6 +53,7 @@ public class Abastecimento {
         this.data = data;
         this.litros = litros;
         this.preco = preco;
+        this.tanque = tanque;
     }
 
     public int getId() {
