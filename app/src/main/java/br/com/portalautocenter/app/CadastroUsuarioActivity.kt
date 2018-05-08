@@ -3,6 +3,7 @@ package br.com.portalautocenter.app
 import android.app.DatePickerDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
@@ -16,14 +17,13 @@ import org.jetbrains.anko.uiThread
 import org.json.JSONObject
 import java.util.*
 import java.text.SimpleDateFormat
+import android.widget.DatePicker
 
+class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
 
-class CadastroUsuarioActivity : AppCompatActivity() {
+    lateinit var datePickerDialog: DatePickerDialog
 
-    private val myCalendar = Calendar.getInstance()
-    private var txt_data: EditText? = null
-
-    var BRAZIL = Locale("pt", "BR")
+    lateinit var dateFormat: SimpleDateFormat
 
     var senha:String = ""
     var s = Senha()
@@ -41,42 +41,41 @@ class CadastroUsuarioActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
 
-        /*Date picker*/
-        val datePickerListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR, year)
-            myCalendar.set(Calendar.MONTH, monthOfYear)
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
-            val myFormat = "dd/MM/yyyy"
-            val sdf = SimpleDateFormat(myFormat, BRAZIL)
-            txt_data!!.setText(sdf.format(myCalendar.getTime()))
-        }
+        setDateTimeField();
 
+        datePickerDialog.getDatePicker().setMaxDate(Date().time)
+        //datePickerDialog.getDatePicker().setMinDate(Date().time)
 
-        txt_data = findViewById<View>(R.id.txt_data) as EditText
-        txt_data!!.setOnClickListener(View.OnClickListener {
-            DatePickerDialog(this, datePickerListener, myCalendar
-                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                    myCalendar.get(Calendar.DAY_OF_MONTH)).show()
-        })
+        val date = System.currentTimeMillis()
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = sdf.format(date)
+        txt_data.setText(dateString)
 
         //Insere a máscara de CPF
         txt_cpf.addTextChangedListener(InputMask.mask(txt_cpf, InputMask.FORMAT_CPF))
 
         btn_cadastro.setOnClickListener {
             if (validaCampos()){
+
                 doAsync {
                     val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/inserir.php"
-                    val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email, "usuario" to usuario, "senha" to senha, "dtNasc" to dtNasc)
+
+                    val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
+                            "usuario" to usuario, "senha" to senha, "dtNasc" to dtNasc)
+
                     val resultado = HttpConnection.post(url, map)
-                    val resultadoJson = JSONObject(resultado)
-                    val sucesso = resultadoJson.getBoolean("sucesso")
+                    Log.d("TAG", resultado)
+
                     uiThread {
-                        if (sucesso){
-                            toast("Usuário cadastrado com sucesso!")
+                        val retorno = JSONObject(resultado)
+                        val resultado = retorno.getBoolean("sucesso")
+                        if (resultado == true){
+                            toast("Usuário cadastrado!")
                             finish()
                         }else{
-                            toast("Falha no cadastro, tente novamente mais tarde!")
+                            toast("Usuario não cadastrado")
                         }
                     }
                 }
@@ -127,8 +126,10 @@ class CadastroUsuarioActivity : AppCompatActivity() {
 
         if (senha.isEmpty()){
             txt_senha.setError(getString(R.string.erroVazio))
+            valido = false
         }else if (s.validaSenha(senha) != true){
             txt_senha.setError(getString(R.string.formatoSenhaIncorreto))
+            valido = false
         }
         return valido
     }
@@ -143,5 +144,20 @@ class CadastroUsuarioActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onClick(view: View?) {
+        datePickerDialog.show()
+    }
+
+    private fun setDateTimeField() {
+        txt_data.setOnClickListener(this)
+
+        val newCalendar = Calendar.getInstance()
+        datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val newDate = Calendar.getInstance()
+            newDate.set(year, monthOfYear, dayOfMonth)
+            txt_data.setText(dateFormat.format(newDate.time))
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH))
     }
 }

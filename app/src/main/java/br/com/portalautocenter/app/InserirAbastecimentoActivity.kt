@@ -1,5 +1,6 @@
 package br.com.portalautocenter.app
 
+import android.annotation.SuppressLint
 import android.arch.persistence.room.Room
 import android.content.Context
 import android.location.Location
@@ -20,15 +21,30 @@ import java.text.DateFormat
 import java.util.*
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
 import java.text.NumberFormat
 
 
-class InserirAbastecimentoActivity : AppCompatActivity() {
+class InserirAbastecimentoActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    lateinit var googleApiClient:GoogleApiClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inserir_abastecimento)
         setSupportActionBar(toolbar)
+
+        googleApiClient = GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build()
+
+        //Conectar com GoogleApi
+        googleApiClient.connect()
 
         val pref = getSharedPreferences("Veiculo", Context.MODE_PRIVATE)
         val idU = pref.getInt("idUsuario", 0)
@@ -53,6 +69,29 @@ class InserirAbastecimentoActivity : AppCompatActivity() {
             finish()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        pararConexaoComGoogleApi()
+    }
+
+    fun pararConexaoComGoogleApi(){
+        if (googleApiClient.isConnected){
+            googleApiClient.disconnect()
+        }
+    }
+
+
+    override fun onConnected(p0: Bundle?) {
+
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        pararConexaoComGoogleApi()
     }
 
 }

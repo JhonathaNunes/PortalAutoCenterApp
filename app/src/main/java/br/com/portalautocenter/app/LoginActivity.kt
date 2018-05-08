@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.MenuItem
 import br.com.portalautocenter.models.Usuario
 import br.com.portalautocenter.utils.HttpConnection
@@ -37,6 +38,8 @@ class LoginActivity : AppCompatActivity() {
                 val map:HashMap<String, String> = hashMapOf("usuario" to usuario, "senha" to senha)
 
                 val resultado = HttpConnection.post(url, map)
+                Log.d("TAG", resultado)
+
 
                 uiThread {
                     val retorno = JSONObject(resultado)

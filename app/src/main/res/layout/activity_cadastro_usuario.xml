@@ -47,7 +47,8 @@
         android:id="@+id/txt_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data de Nascimento"/>
+        android:hint="Data de Nascimento"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/txt_usuario"
