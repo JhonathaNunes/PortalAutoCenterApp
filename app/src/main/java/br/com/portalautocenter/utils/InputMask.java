@@ -12,9 +12,11 @@ import android.widget.EditText;
 public abstract class InputMask {
     public static final String FORMAT_CPF = "###.###.###-##";
     public static final String FORMAT_FONE = "(###)####-#####";
+    public static final String FORMAT_CEL = "(###)#####-#####";
     public static final String FORMAT_CEP = "#####-###";
     public static final String FORMAT_DATE = "##/##/####";
     public static final String FORMAT_HOUR = "##:##";
+    public static final String FORMAT_MONEY = "R$###,##";
 
     /**
      * Método que deve ser chamado para realizar a formatação
@@ -64,6 +66,6 @@ public abstract class InputMask {
     }
 
     public static String unmask(final String s) {
-        return s.replaceAll("[.]", "").replaceAll("[-]", "").replaceAll("[/]", "").replaceAll("[(]", "").replaceAll("[ ]","").replaceAll("[:]", "").replaceAll("[)]", "");
+        return s.replaceAll("[.]", "").replaceAll("[-]", "").replaceAll("[/]", "").replaceAll("[(]", "").replaceAll("[ ]","").replaceAll("[:]", "").replaceAll("[)]", "").replaceAll("[R$]", "");
     }
 }

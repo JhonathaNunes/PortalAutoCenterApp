@@ -12,27 +12,32 @@
 
     <EditText
         android:id="@+id/txt_preco"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Valor Abastecido"/>
+        android:hint="Valor Abastecido"
+        android:maxLength="8"/>
 
     <EditText
         android:id="@+id/txt_litros"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Litros abastecidos"/>
+        android:hint="Litros abastecidos"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/txt_tanque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Litros no Tanque "/>
+        android:hint="Litros no Tanque"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/txt_rede"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Rede"/>
+        android:hint="Rede"
+        android:inputType="text"/>
 
     <Button
         android:id="@+id/btn_inserir"
@@ -43,4 +48,8 @@
         android:backgroundTint="@color/colorAccent"
         android:layout_gravity="center"/>
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -4,89 +4,61 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import java.lang.ref.WeakReference;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by 16254855 on 23/04/2018.
  */
 
 
-public abstract class MonetaryMask {
-    public static String unmask(String s) {
-        return s.replaceAll("[.]", "").replaceAll("[-]", "")
-                .replaceAll("[/]", "").replaceAll("[(]", "")
-                .replaceAll("[)]", "");
+public class MonetaryMask implements TextWatcher {
+    private final WeakReference<EditText> editTextWeakReference;
+    private final Locale locale;
+
+    public MonetaryMask(EditText editText, Locale locale) {
+        this.editTextWeakReference = new WeakReference<EditText>(editText);
+        this.locale = locale != null ? locale : Locale.getDefault();
     }
 
-    public static TextWatcher insert(final String mask, final EditText ediTxt) {
-        return new TextWatcher() {
-            boolean isUpdating;
-            String old = "";
-
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                String str = MonetaryMask.unmask(s.toString());
-                String mascara = "";
-                if (isUpdating) {
-                    old = str;
-                    isUpdating = false;
-                    return;
-                }
-                int i = 0;
-                for (char m : mask.toCharArray()) {
-                    if (m != '#' && str.length() > old.length()) {
-                        mascara += m;
-                        continue;
-                    }
-                    try {
-                        mascara += str.charAt(i);
-                    } catch (Exception e) {
-                        break;
-                    }
-                    i++;
-                }
-                isUpdating = true;
-                ediTxt.setText(mascara);
-                ediTxt.setSelection(mascara.length());
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        };
+    public MonetaryMask(EditText editText) {
+        this.editTextWeakReference = new WeakReference<EditText>(editText);
+        this.locale = Locale.getDefault();
     }
 
-    public static TextWatcher monetario(final EditText ediTxt) {
-        return new TextWatcher() {
-            // Mascara monetaria para o preço do produto
-            private String current = "";
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            @Override
-            public void afterTextChanged(Editable s) { }
+    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!s.toString().equals(current)){
-                    ediTxt.removeTextChangedListener(this);
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    String cleanString = s.toString().replaceAll("[R$,.]", "");
+    }
 
-                    double parsed = Double.parseDouble(cleanString);
-                    String formatted = NumberFormat.getCurrencyInstance().format((parsed/100));
+    @Override
+    public void afterTextChanged(Editable editable) {
+        EditText editText = editTextWeakReference.get();
+        if (editText == null) return;
+        editText.removeTextChangedListener(this);
 
-                    current = formatted.replaceAll("[R$]", "");
-                    ediTxt.setText(current);
-                    ediTxt.setSelection(current.length());
+        BigDecimal parsed = parseToBigDecimal(editable.toString(), locale);
+        String formatted = NumberFormat.getCurrencyInstance(locale).format(parsed);
 
-                    ediTxt.addTextChangedListener(this);
-                }
-            }
+        editText.setText(formatted);
+        editText.setSelection(formatted.length());
+        editText.addTextChangedListener(this);
+    }
 
-        };
+    private BigDecimal parseToBigDecimal(String value, Locale locale) {
+        String replaceable = String.format("[%s,.\\s]", NumberFormat.getCurrencyInstance(locale).getCurrency().getSymbol());
+
+        String cleanString = value.replaceAll(replaceable, "");
+
+        return new BigDecimal(cleanString).setScale(
+                2, BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR
+        );
     }
 }

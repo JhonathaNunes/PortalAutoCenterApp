@@ -1,9 +1,7 @@
 package br.com.portalautocenter.app
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 
@@ -33,14 +31,9 @@ import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.jetbrains.anko.toast
-import android.preference.PreferenceManager
-import android.support.v4.app.ActivityCompat
 import br.com.portalautocenter.adapters.PrestadoraAdapter
 import br.com.portalautocenter.adapters.ProdutosDestaqueAdapter
 import br.com.portalautocenter.models.Prestadora
-import br.com.portalautocenter.utils.PegaLocalizacao
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
