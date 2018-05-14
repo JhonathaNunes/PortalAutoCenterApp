@@ -1,9 +1,11 @@
 package br.com.portalautocenter.app
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import br.com.portalautocenter.adapters.VeiculosAdapter
 import br.com.portalautocenter.models.Produto
@@ -12,11 +14,14 @@ import br.com.portalautocenter.utils.HttpConnection
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_perfil.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import org.json.JSONObject
 
 class PerfilActivity : AppCompatActivity() {
+
+    var idUsuario =  0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +35,30 @@ class PerfilActivity : AppCompatActivity() {
         if (usuario.getBoolean("STATUS", false)){
             preencheCampos(usuario.getString("USUARIO", "NoUser"))
         }
+
+        btn_editar.setOnClickListener {
+            val intent = Intent(applicationContext, CadastroUsuarioActivity::class.java)
+            intent.putExtra("Edicao", true)
+            intent.putExtra("idUsuario", idUsuario)
+            startActivity(intent)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater!!.inflate(R.menu.perfil_menu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
-            android.R.id.home
-            -> {
-                finish()
-            }
-            else -> {
-            }
+       val id = item.itemId
+
+        if (id == R.id.nav_enderecos){
+            toast("Abrir activity de enderecos")
+        }
+
+        if (id == R.id.nav_senha){
+            toast("Abrir activity para alterar senha")
         }
         return true
     }
@@ -51,12 +70,13 @@ class PerfilActivity : AppCompatActivity() {
         txt_cpf.setText(usuario.getString("cpf"))
         txt_email.setText(usuario.getString("email"))
         txt_usuario.setText(usuario.getString("usuario"))
+        idUsuario = usuario.getInt("idUsuario")
         val url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
         Picasso.with(applicationContext).load(url).into(profile_image)
 
         doAsync {
             val listVeiculos = ArrayList<Veiculo>()
-            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" + usuario.getInt("idUsuario"))
+            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" + idUsuario)
 
             Log.d("TAG", jsonReturn)
 

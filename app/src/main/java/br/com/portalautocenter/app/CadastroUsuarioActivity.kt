@@ -1,6 +1,8 @@
 package br.com.portalautocenter.app
 
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +20,8 @@ import org.json.JSONObject
 import java.util.*
 import java.text.SimpleDateFormat
 import android.widget.DatePicker
+import android.widget.TextView
+import com.squareup.picasso.Picasso
 
 class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -33,6 +37,7 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
     var email:String = ""
     var usuario:String = ""
     var dtNasc:String = ""
+    var edicao:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,10 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
+
+        var intent = intent
+
+        edicao = intent.getBooleanExtra("Edicao", false)
 
         dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
@@ -53,29 +62,64 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
         val dateString = sdf.format(date)
         txt_data.setText(dateString)
 
+        if (edicao){
+            txt_senha.visibility = TextView.GONE
+            val usuario = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
+
+            if (usuario.getBoolean("STATUS", false)){
+                preencherCampos(usuario.getString("USUARIO", "NoUser"))
+            }
+        }
+
         //Insere a máscara de CPF
         txt_cpf.addTextChangedListener(InputMask.mask(txt_cpf, InputMask.FORMAT_CPF))
 
         btn_cadastro.setOnClickListener {
             if (validaCampos()){
 
-                doAsync {
-                    val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/inserir.php"
+                if (edicao){
+                    val idUsuario = intent.getIntExtra("idUsuario", 0)
 
-                    val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
-                            "usuario" to usuario, "senha" to senha, "dtNasc" to dtNasc)
+                    doAsync {
+                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/editar.php"
 
-                    val resultado = HttpConnection.post(url, map)
-                    Log.d("TAG", resultado)
+                        val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
+                                "usuario" to usuario, "dtNasc" to dtNasc, "idUsuario" to idUsuario.toString())
 
-                    uiThread {
-                        val retorno = JSONObject(resultado)
-                        val resultado = retorno.getBoolean("sucesso")
-                        if (resultado == true){
-                            toast("Usuário cadastrado!")
-                            finish()
-                        }else{
-                            toast("Usuario não cadastrado")
+                        val resultado = HttpConnection.post(url, map)
+                        Log.d("TAG", resultado)
+
+                        uiThread {
+                            val retorno = JSONObject(resultado)
+                            val resultado = retorno.getBoolean("sucesso")
+                            if (resultado == true){
+                                toast("Usuário Atualizado!")
+                                finish()
+                            }else{
+                                toast("Usuario não Atualizado")
+                            }
+                        }
+                    }
+
+                }else{
+                    doAsync {
+                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/inserir.php"
+
+                        val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
+                                "usuario" to usuario, "senha" to senha, "dtNasc" to dtNasc)
+
+                        val resultado = HttpConnection.post(url, map)
+                        Log.d("TAG", resultado)
+
+                        uiThread {
+                            val retorno = JSONObject(resultado)
+                            val resultado = retorno.getBoolean("sucesso")
+                            if (resultado == true){
+                                toast("Usuário cadastrado!")
+                                finish()
+                            }else{
+                                toast("Usuario não cadastrado")
+                            }
                         }
                     }
                 }
@@ -124,13 +168,16 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
             dtNasc = txt_data!!.text.toString()
         }
 
-        if (senha.isEmpty()){
-            txt_senha.setError(getString(R.string.erroVazio))
-            valido = false
-        }else if (s.validaSenha(senha) != true){
-            txt_senha.setError(getString(R.string.formatoSenhaIncorreto))
-            valido = false
+        if (edicao == false){
+            if (senha.isEmpty()){
+                txt_senha.setError(getString(R.string.erroVazio))
+                valido = false
+            }else if (s.validaSenha(senha) != true){
+                txt_senha.setError(getString(R.string.formatoSenhaIncorreto))
+                valido = false
+            }
         }
+
         return valido
     }
 
@@ -159,5 +206,17 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
             newDate.set(year, monthOfYear, dayOfMonth)
             txt_data.setText(dateFormat.format(newDate.time))
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH))
+    }
+
+    private fun preencherCampos(json:String){
+        val usuario = JSONObject(json)
+
+        txt_nome.setText(usuario.getString("nome"))
+        txt_cpf.setText(usuario.getString("cpf"))
+        txt_email.setText(usuario.getString("email"))
+        txt_data.setText(usuario.getString("dtNasc"))
+        txt_usuario.setText(usuario.getString("usuario"))
+        val url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
+        Picasso.with(applicationContext).load(url).into(profile_image)
     }
 }

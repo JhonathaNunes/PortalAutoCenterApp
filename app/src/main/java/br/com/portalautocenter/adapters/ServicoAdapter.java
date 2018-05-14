@@ -44,7 +44,7 @@ public class ServicoAdapter extends ArrayAdapter<Servico>{
         ImageView imgServico = (ImageView)v.findViewById(R.id.imagem_servico);
 
         //Colocando a imagem como Picasso
-        String url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/cms/"+servico.getImagem();
+        String url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/cms/"+servico.getImagem();
         Picasso.with(getContext()).load(url).into(imgServico);
 
         txtServico.setText(servico.getNome());

@@ -57,7 +57,7 @@ public class VeiculosAdapter extends PagerAdapter {
         txtModelo.setText(v.getModelo());
         txtPlaca.setText(v.getPlaca());
 
-        String url = "http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+v.getFoto();
+        String url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+v.getFoto();
         Picasso.with(aContext).load(url).into(imageView);
 
         container.addView(prestView);

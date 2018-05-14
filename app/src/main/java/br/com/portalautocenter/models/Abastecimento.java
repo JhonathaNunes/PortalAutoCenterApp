@@ -23,10 +23,10 @@ public class Abastecimento {
     private String posto;
 
     @ColumnInfo(name = "latitude")
-    private String latitude;
+    private Double latitude;
 
     @ColumnInfo(name = "longitude")
-    private String longitude;
+    private Double longitude;
 
     @ColumnInfo(name = "data")
     private String data;
@@ -44,7 +44,7 @@ public class Abastecimento {
 
     }
 
-    public Abastecimento(int idUsuario, int idVeiculo, String posto, String latitude, String longitude, String data, Double litros, Double preco, Double tanque) {
+    public Abastecimento(int idUsuario, int idVeiculo, String posto, Double latitude, Double longitude, String data, Double litros, Double preco, Double tanque) {
         this.idUsuario = idUsuario;
         this.idVeiculo = idVeiculo;
         this.posto = posto;
@@ -88,19 +88,19 @@ public class Abastecimento {
         this.posto = posto;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

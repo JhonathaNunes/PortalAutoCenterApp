@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_enderecos"
+        android:title="Gerenciar Enderecos" />
+
+    <item
+        android:id="@+id/nav_senha"
+        android:title="Alterar Senha"/>
+
+</menu>
