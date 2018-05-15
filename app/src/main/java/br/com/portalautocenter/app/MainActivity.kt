@@ -179,9 +179,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         lstPrestadora.add(p)
 
                     }
-                    }catch (e:Exception) {
-                        Log.e("Cometeu um erro: ", e.message)
-                    }
+                }catch (e:Exception) {
+                    Log.e("Cometeu um erro: ", e.message)
+                }
                 uiThread {
                     val customAdapter = PrestadoraAdapter(context, lstPrestadora)
                     view_prestadora.adapter = customAdapter

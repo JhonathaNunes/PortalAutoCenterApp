@@ -9,7 +9,7 @@ import br.com.portalautocenter.models.Abastecimento;
  * Created by 16254855 on 19/04/2018.
  */
 
-@Database(entities = {Abastecimento.class}, version = 1)
+@Database(entities = {Abastecimento.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract AbastecimentoDao abastecimentoDao();
 }

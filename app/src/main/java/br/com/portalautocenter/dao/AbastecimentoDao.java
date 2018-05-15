@@ -18,7 +18,7 @@ public interface AbastecimentoDao {
     @Query("SELECT * FROM abastecimento")
     List<Abastecimento> getAll();
 
-    @Query("SELECT * FROM abastecimento WHERE idUsuario IN (:idU) AND idVeiculo IN(:idV)")
+    @Query("SELECT * FROM abastecimento WHERE idUsuario IN (:idU) AND idVeiculo IN(:idV) ORDER BY id DESC")
     List<Abastecimento> getByUser(int idU, int idV);
 
     @Insert

@@ -75,7 +75,7 @@ class InserirAbastecimentoActivity : AppCompatActivity(), OnMapReadyCallback{
             val tanque = txt_tanque.text.toString().replace(",", ".").toDouble()
             val data = DateFormat.getDateInstance().format(Date())
 
-            toast(preco.toString())
+            toast("Abastecimento Cadastrado com Sucesso")
             val abastecimemto = Abastecimento(idU, idV, posto, latitude, longitude, data, litros, preco, tanque)
 
             db.abastecimentoDao().insertAll(abastecimemto)

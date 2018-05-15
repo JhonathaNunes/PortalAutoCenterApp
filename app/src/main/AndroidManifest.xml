@@ -53,6 +53,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.portalautocenter.app.ControleAbastecimentoActivity" />
         </activity>
+        <activity
+            android:name=".EnderecoActivity"
+            android:label="@string/title_activity_endereco"
+            android:parentActivityName=".PerfilActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.PerfilActivity" />
+        </activity>
+        <activity
+            android:name=".InsertEnderecoActivity"
+            android:label="@string/title_activity_insert_endereco"
+            android:parentActivityName=".EnderecoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.EnderecoActivity" />
+        </activity>
     </application>
 
 </manifest>

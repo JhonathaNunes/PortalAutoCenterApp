@@ -81,7 +81,8 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
                     val idUsuario = intent.getIntExtra("idUsuario", 0)
 
                     doAsync {
-                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/editar.php"
+                        val url ="http://www.i9autocenter/api/usuario/editar.php"
+//                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/editar.php"
 
                         val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
                                 "usuario" to usuario, "dtNasc" to dtNasc, "idUsuario" to idUsuario.toString())

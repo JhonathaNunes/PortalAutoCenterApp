@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PortalAutoCenter</string>
+    <string name="app_name">Portal Auto Center</string>
     <string name="tab_text_1">Destaques</string>
     <string name="tab_text_2">Produtos</string>
     <string name="tab_text_3">Serviços</string>
@@ -17,7 +17,6 @@
     <string name="erroVazio">Este campo não pode ser vazio!</string>
     <string name="formatoSenhaIncorreto">A senha deve ter no mínimo 8 caractéres, sendo no mínimo um caracter maiúsculo e contendo um número</string>
     <string name="editar">Editar</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_abastecimento">AbastecimentoActivity</string>
@@ -29,4 +28,11 @@
     <string name="title_activity_inserir_abastecimento">Registrar Abastecimento</string>
     <string name="DATABASE_NAME">abastecimento</string>
     <string name="insert_abastecimento">Abastecimento adcionado com sucesso</string>
+    <string name="title_activity_endereco">Gerenciar Enderecos</string>
+    <string name="logradouro">Rua José Martim Coutinho</string>
+    <string name="num">1827</string>
+    <string name="bairro">Jd. Teste</string>
+    <string name="cep">09748-123</string>
+    <string name="tpEndereco">Residencial</string>
+    <string name="title_activity_insert_endereco">InsertEnderecoActivity</string>
 </resources>

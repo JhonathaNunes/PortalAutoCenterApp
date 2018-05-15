@@ -54,12 +54,24 @@ class PerfilActivity : AppCompatActivity() {
        val id = item.itemId
 
         if (id == R.id.nav_enderecos){
-            toast("Abrir activity de enderecos")
+            val intent = Intent(applicationContext, EnderecoActivity::class.java)
+            intent.putExtra("idUsuario", idUsuario)
+            startActivity(intent)
         }
 
         if (id == R.id.nav_senha){
             toast("Abrir activity para alterar senha")
         }
+
+        when (item.itemId) {
+            android.R.id.home  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+            -> {
+                finish()
+            }
+            else -> {
+            }
+        }
+
         return true
     }
 
