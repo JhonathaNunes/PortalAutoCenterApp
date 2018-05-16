@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\16254855\Documents\PortalAutoCenter\PortalApp.iml" filepath="C:\Users\16254855\Documents\PortalAutoCenter\PortalApp.iml" />
       <module fileurl="file://C:\Users\16254855\Documents\PortalAutoCenterApp\PortalApp.iml" filepath="C:\Users\16254855\Documents\PortalAutoCenterApp\PortalApp.iml" />
+      <module fileurl="file://C:\Users\16254855\Documents\PortalAutoCenter\PortalApp.iml" filepath="C:\Users\16254855\Documents\PortalAutoCenter\PortalApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/PortalAutoCenter.iml" filepath="$PROJECT_DIR$/PortalAutoCenter.iml" />
       <module fileurl="file://C:\Users\16254855\Documents\PortalApp\PortalAutoCenter.iml" filepath="C:\Users\16254855\Documents\PortalApp\PortalAutoCenter.iml" />
       <module fileurl="file://C:\Users\16254855\Documents\PortalAutoCenter\PortalAutoCenterApp.iml" filepath="C:\Users\16254855\Documents\PortalAutoCenter\PortalAutoCenterApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\16254855\Documents\PortalAutoCenter\app\app.iml" filepath="C:\Users\16254855\Documents\PortalAutoCenter\app\app.iml" />
     </modules>
   </component>
 </project>
