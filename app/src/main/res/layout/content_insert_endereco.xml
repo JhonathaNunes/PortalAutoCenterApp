@@ -10,7 +10,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Logradouro"
+            android:maxLines="1"
             android:layout_weight="4"/>
 
         <EditText
@@ -27,7 +27,66 @@
             android:layout_width="11dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:maxLines="1"
+            android:inputType="number"
             android:hint="Num" />
     </LinearLayout>
+    <EditText
+        android:id="@+id/txt_complemento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:hint="Complemento"/>
+    <EditText
+        android:id="@+id/txt_bairro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:hint="Bairro"/>
+    <EditText
+        android:id="@+id/txt_cep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLines="1"
+        android:hint="CEP" />
+    <Spinner
+        android:id="@+id/spinner_tpEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/spinner_estado"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+
+    </Spinner>
+    <Spinner
+        android:id="@+id/spinner_cidade"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+
+    </Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="#fff"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
 
 </LinearLayout>
