@@ -19,21 +19,27 @@ import org.json.JSONArray
 
 class EnderecoActivity : AppCompatActivity() {
 
+    var idUsuario = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_endereco)
         setSupportActionBar(toolbar)
 
         var intent = intent
-        val idUsuario = intent.getIntExtra("idUsuario", 0)
+        intent.putExtra("modo", "insert")
+        idUsuario = intent.getIntExtra("idUsuario", 0)
 
         fab.setOnClickListener { view ->
             var intent = Intent(applicationContext, InsertEnderecoActivity::class.java)
-
+            intent.putExtra("idUsuario", idUsuario)
+            intent.putExtra("modo", "insert")
             startActivity(intent)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
+    override fun onResume() {
         val adapterEndereco = EnderecoAdapter(applicationContext, ArrayList<Endereco>())
 
         list_enderecos.adapter = adapterEndereco
@@ -64,8 +70,15 @@ class EnderecoActivity : AppCompatActivity() {
 
 
         list_enderecos.setOnItemClickListener { adapterView, view, i, l ->
-            toast(adapterEndereco.getItem(i).bairro)
+            var intent = Intent(applicationContext, InsertEnderecoActivity::class.java)
+
+            intent.putExtra("modo", "edit")
+            intent.putExtra("endereco", adapterEndereco.getItem(i))
+
+            startActivity(intent)
         }
+
+        super.onResume()
     }
 
 }
