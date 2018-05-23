@@ -8,13 +8,26 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/sample_1"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"/>
+        android:layout_gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/sample_1"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_mode_edit_black_24dp" />
+    </android.support.design.widget.CoordinatorLayout>
 
     <EditText
         android:id="@+id/txt_nome"

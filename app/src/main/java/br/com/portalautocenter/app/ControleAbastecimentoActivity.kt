@@ -11,7 +11,7 @@ import br.com.portalautocenter.models.Abastecimento
 
 import kotlinx.android.synthetic.main.activity_controle_abastecimento.*
 import kotlinx.android.synthetic.main.content_controle_abastecimento.*
-import org.jetbrains.anko.toast
+
 
 class ControleAbastecimentoActivity : AppCompatActivity() {
 
@@ -25,8 +25,6 @@ class ControleAbastecimentoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -39,11 +37,20 @@ class ControleAbastecimentoActivity : AppCompatActivity() {
 
         val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, getString(R.string.DATABASE_NAME)).allowMainThreadQueries().build()
 
-        val list_abastecimentos = db.abastecimentoDao().getByUser(veiculo.getInt("idUsuario", 0), veiculo.getInt("idVeiculo", 0))
+        val lst_abastecimentos = db.abastecimentoDao().getByUser(veiculo.getInt("idUsuario", 0), veiculo.getInt("idVeiculo", 0))
 
-        adapter.addAll(list_abastecimentos)
+        adapter.addAll(lst_abastecimentos)
+
+        list_abastecimentos.setOnItemClickListener { adapterView, view, i, l ->
+            val intent = Intent(applicationContext, InserirAbastecimentoActivity::class.java)
+
+            intent.putExtra("viewMode", true)
+            intent.putExtra("Abastecimento", adapter.getItem(i))
+
+            startActivity(intent)
+        }
+
 
         super.onResume()
     }
-
 }

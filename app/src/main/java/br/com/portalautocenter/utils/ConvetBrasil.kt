@@ -2,6 +2,7 @@ package br.com.portalautocenter.utils
 
 import java.text.DateFormat
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -15,4 +16,15 @@ fun converteParaReal(double:Double):String{
     val preco = nf.format(double)
 
     return preco
+}
+
+fun converteData(data:String):String{
+    var format = SimpleDateFormat("yyyy-MM-dd")
+    var dataParse = format.parse(data)
+
+    format = SimpleDateFormat("dd/MM/yyyy")
+
+    var dataFormatada = format.format(dataParse)
+
+    return dataFormatada
 }

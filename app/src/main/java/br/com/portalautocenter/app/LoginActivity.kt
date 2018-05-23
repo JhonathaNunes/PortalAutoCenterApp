@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             val senha = txt_senha.text.toString()
 
             doAsync {
-                val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/login.php"
+                val url ="http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/login.php"
 
                 val map:HashMap<String, String> = hashMapOf("usuario" to usuario, "senha" to senha)
 

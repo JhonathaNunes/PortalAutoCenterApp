@@ -20,9 +20,14 @@ import org.jetbrains.anko.toast
 import java.text.DateFormat
 import java.util.*
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import br.com.portalautocenter.utils.InputMask
 import br.com.portalautocenter.utils.MonetaryMask
+import br.com.portalautocenter.utils.converteParaReal
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 
@@ -84,6 +89,15 @@ class InserirAbastecimentoActivity : AppCompatActivity(), OnMapReadyCallback{
 
             finish()
         }
+
+        var intent = getIntent()
+        var view = intent.getBooleanExtra("viewMode", false)
+        if (view){
+            val abastecimento:Abastecimento = intent.getSerializableExtra("Abastecimento") as Abastecimento
+            preencherCampos(abastecimento)
+
+        }
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -110,6 +124,23 @@ class InserirAbastecimentoActivity : AppCompatActivity(), OnMapReadyCallback{
         }
 
         mapa_abastecimento.onResume()
+    }
+
+    fun preencherCampos(abastecimento:Abastecimento){
+        mapa_abastecimento.visibility = MapView.VISIBLE
+        btn_inserir.visibility = Button.GONE
+        txt_preco.setText(converteParaReal(abastecimento.preco))
+        txt_tanque.setText(abastecimento.tanque.toString())
+        txt_rede.setText(abastecimento.posto)
+        txt_litros.setText(abastecimento.litros.toString())
+
+        txt_preco.isEnabled = false
+        txt_tanque.isEnabled = false
+        txt_rede.isEnabled = false
+        txt_litros.isEnabled = false
+
+        latitude = abastecimento.latitude
+        longitude = abastecimento.longitude
     }
 
     override fun onStart() {
@@ -150,7 +181,7 @@ class InserirAbastecimentoActivity : AppCompatActivity(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         gMap = googleMap
         gMap.setMinZoomPreference(12F)
-        val mark = LatLng(48.857482, 2.348088)
+        val mark = LatLng(latitude, longitude)
         gMap.moveCamera(CameraUpdateFactory.newLatLng(mark))
     }
 

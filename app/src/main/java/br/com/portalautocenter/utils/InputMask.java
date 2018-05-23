@@ -16,7 +16,7 @@ public abstract class InputMask {
     public static final String FORMAT_CEP = "#####-###";
     public static final String FORMAT_DATE = "##/##/####";
     public static final String FORMAT_HOUR = "##:##";
-    public static final String FORMAT_MONEY = "R$###,##";
+    public static final String FORMAT_NUMBER = "###,##";
 
     /**
      * Método que deve ser chamado para realizar a formatação

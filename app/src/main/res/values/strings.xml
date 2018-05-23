@@ -28,11 +28,11 @@
     <string name="title_activity_inserir_abastecimento">Registrar Abastecimento</string>
     <string name="DATABASE_NAME">abastecimento</string>
     <string name="insert_abastecimento">Abastecimento adcionado com sucesso</string>
-    <string name="title_activity_endereco">Gerenciar Enderecos</string>
+    <string name="title_activity_endereco">Gerenciar Endereços</string>
     <string name="logradouro">Rua José Martim Coutinho</string>
     <string name="num">1827</string>
     <string name="bairro">Jd. Teste</string>
     <string name="cep">09748-123</string>
     <string name="tpEndereco">Residencial</string>
-    <string name="title_activity_insert_endereco">InsertEnderecoActivity</string>
+    <string name="title_activity_insert_endereco">Gerenciar Endereço</string>
 </resources>

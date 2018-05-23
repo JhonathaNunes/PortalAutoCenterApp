@@ -66,7 +66,7 @@ class InsertEnderecoActivity : AppCompatActivity() {
         spinner_tpEndereco.adapter = adapterTP
 
         doAsync {
-            var url = "http://10.107.144.17/Inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/selecionarEndereco.php"
+            var url = "http://10.0.2.2/Inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/selecionarEndereco.php"
 
             var lst:ArrayList<TipoEndereco> = ArrayList<TipoEndereco>()
             val jsonReturn = HttpConnection.get(url)
@@ -104,7 +104,7 @@ class InsertEnderecoActivity : AppCompatActivity() {
         spinner_estado.adapter = adapterEstado
 
         doAsync {
-            var url = "http://10.107.144.17/Inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/estados.php"
+            var url = "http://10.0.2.2/Inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/estados.php"
 
             var lst:ArrayList<Estado> = ArrayList<Estado>()
             val jsonReturn = HttpConnection.get(url)
@@ -141,7 +141,7 @@ class InsertEnderecoActivity : AppCompatActivity() {
                 var idEstado = adapterEstado.getItem(position).id
 
                 doAsync {
-                    var url = "http://10.107.144.17/Inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/cidades.php?idEstado=$idEstado"
+                    var url = "http://10.0.2.2/Inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/cidades.php?idEstado=$idEstado"
 
                     var lst:ArrayList<Cidade> = ArrayList<Cidade>()
                     val jsonReturn = HttpConnection.get(url)
@@ -183,7 +183,7 @@ class InsertEnderecoActivity : AppCompatActivity() {
             if (validaDados()){
                 if (modo == "insert"){
                     doAsync {
-                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/inserir.php"
+                        val url ="http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/inserir.php"
 
                         val map: HashMap<String, String> = hashMapOf("logradouro" to logradouro, "numero" to numero, "complemento" to complemento, "bairro" to bairro,
                                 "cep" to cep, "idTipoEndereco" to idTipoEndereco.toString(), "idCidade" to idCidade.toString(), "idUsuario" to idUsuario.toString())
@@ -204,7 +204,7 @@ class InsertEnderecoActivity : AppCompatActivity() {
                     }
                 }else{
                     doAsync {
-                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/editar.php?idEndereco=$idEndereco"
+                        val url ="http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/editar.php?idEndereco=$idEndereco"
 
                         val map: HashMap<String, String> = hashMapOf("logradouro" to logradouro, "numero" to numero, "complemento" to complemento, "bairro" to bairro,
                                 "cep" to cep, "idTipoEndereco" to idTipoEndereco.toString(), "idCidade" to idCidade.toString(), "idUsuario" to idUsuario.toString())
@@ -243,7 +243,7 @@ class InsertEnderecoActivity : AppCompatActivity() {
 
             /////FAZER A EXCLUSÃO E A API
             doAsync {
-                val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/excluir.php"
+                val url ="http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/excluir.php"
 
                 val map: HashMap<String, String> = hashMapOf("idEndereco" to idEndereco.toString())
 

@@ -23,14 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Litros abastecidos"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:maxLength="2"/>
 
     <EditText
         android:id="@+id/txt_tanque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Litros no Tanque"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:maxLength="2"/>
 
     <EditText
         android:id="@+id/txt_rede"
@@ -51,5 +53,6 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapa_abastecimento"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </LinearLayout>

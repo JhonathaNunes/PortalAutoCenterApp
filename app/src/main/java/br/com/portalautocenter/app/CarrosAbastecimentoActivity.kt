@@ -39,7 +39,7 @@ class CarrosAbastecimentoActivity : AppCompatActivity() {
 
         doAsync {
             val listVeiculos = ArrayList<Veiculo>()
-            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" +
+            val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" +
                     "${id.getInt("idUsuario")}")
 
             Log.d("TAG", jsonReturn)

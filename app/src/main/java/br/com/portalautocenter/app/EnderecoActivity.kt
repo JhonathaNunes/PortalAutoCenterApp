@@ -46,7 +46,7 @@ class EnderecoActivity : AppCompatActivity() {
 
         doAsync {
             var lstEnderecos:ArrayList<Endereco> = ArrayList<Endereco>()
-            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/select.php?idUsuario=$idUsuario")
+            val jsonReturn = HttpConnection.get("http://10.0.2.2/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/select.php?idUsuario=$idUsuario")
             Log.d("TAG", jsonReturn)
 
             try{

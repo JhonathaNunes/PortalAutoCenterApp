@@ -4,12 +4,14 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 /**
  * Created by 16254855 on 19/04/2018.
  */
 
 @Entity
-public class Abastecimento {
+public class Abastecimento implements Serializable{
     @PrimaryKey(autoGenerate = true)
     private int id;
 
