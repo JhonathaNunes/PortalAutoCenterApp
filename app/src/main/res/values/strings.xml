@@ -35,4 +35,5 @@
     <string name="cep">09748-123</string>
     <string name="tpEndereco">Residencial</string>
     <string name="title_activity_insert_endereco">Gerenciar Endereço</string>
+    <string name="title_activity_detalhe_produto">Detalhes Produto</string>
 </resources>

@@ -71,6 +71,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.portalautocenter.app.EnderecoActivity" />
         </activity>
+        <activity
+            android:name=".DetalheProdutoActivity"
+            android:label="@string/title_activity_detalhe_produto"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
