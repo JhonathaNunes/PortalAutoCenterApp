@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.content_main.*
 import br.com.portalautocenter.adapters.PrestadoraAdapter
 import br.com.portalautocenter.adapters.ProdutosDestaqueAdapter
 import br.com.portalautocenter.models.Prestadora
+import br.com.portalautocenter.utils.api
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
@@ -163,7 +164,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             doAsync {
                 var lstPrestadora:ArrayList<Prestadora> = ArrayList<Prestadora>()
-                val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/prestadora/selecionar.php")
+                val jsonReturn = HttpConnection.get(api +  "api/prestadora/selecionar.php")
 
                 Log.d("TAG", jsonReturn)
 
@@ -190,7 +191,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 /*Preencher Carousel de Produtos*/
                 doAsync {
                     var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
-                    val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
+                    val jsonReturn = HttpConnection.get(api + "api/produtos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 
@@ -200,8 +201,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         for (i in 0..jsonArray.length() step 1) run {
                             val p: Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
                                     jsonArray.getJSONObject(i).getDouble("preco"), jsonArray.getJSONObject(i).getString("descricao"),
-                                    jsonArray.getJSONObject(i).getInt("idSubcategoria"),
-                                    jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"))
+                                    jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"),
+                                    jsonArray.getJSONObject(i).getString("marca"), jsonArray.getJSONObject(i).getString("fabricante"),
+                                    jsonArray.getJSONObject(i).getString("obs"), jsonArray.getJSONObject(i).getString("garantia"))
 
                             lstProdutos.add(p)
 
@@ -225,7 +227,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 doAsync {
                     var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
-                    val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/produtos/selecionar.php")
+                    val jsonReturn = HttpConnection.get(api + "api/produtos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 
@@ -235,8 +237,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         for (i in 0..jsonArray.length() step 1) run {
                             val p: Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
                                     jsonArray.getJSONObject(i).getDouble("preco"), jsonArray.getJSONObject(i).getString("descricao"),
-                                    jsonArray.getJSONObject(i).getInt("idSubcategoria"),
-                                    jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"))
+                                    jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"),
+                                    jsonArray.getJSONObject(i).getString("marca"), jsonArray.getJSONObject(i).getString("fabricante"),
+                                    jsonArray.getJSONObject(i).getString("obs"), jsonArray.getJSONObject(i).getString("garantia"))
 
                             lstProdutos.add(p)
 
@@ -248,6 +251,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     uiThread {
                         adapterProduto.addAll(lstProdutos)
                     }
+
+                    rootView.list_produtos.setOnItemClickListener { adapterView, view, i, l ->
+                        val intent = Intent(context, DetalheProdutoActivity::class.java)
+
+                        intent.putExtra("produto", adapterProduto.getItem(i))
+
+                        startActivity(intent)
+                    }
                 }
 
             } else if(arguments.getInt(ARG_SECTION_NUMBER)==3){
@@ -258,7 +269,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 doAsync {
                     var lstServico:ArrayList<Servico> = ArrayList<Servico>()
-                    val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/servicos/selecionar.php")
+                    val jsonReturn = HttpConnection.get(api + "api/servicos/selecionar.php")
 
                     Log.d("TAG", jsonReturn)
 

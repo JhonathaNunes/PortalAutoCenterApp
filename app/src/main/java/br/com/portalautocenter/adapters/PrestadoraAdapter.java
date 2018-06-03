@@ -54,7 +54,7 @@ public class PrestadoraAdapter extends PagerAdapter{
 
         txtDesc.setText(p.getDescricao());
         txtNome.setText(p.getNomeFantasia());
-        String url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+p.getFotoPrestadora();
+        String url = "http://10.0.0.104/portal/cms/" + p.getFotoPrestadora();
         Picasso.with(aContext).load(url).into(imageView);
         //imageView.setImageResource(aResources[position]);
 

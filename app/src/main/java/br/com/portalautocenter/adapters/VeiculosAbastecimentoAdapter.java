@@ -45,7 +45,7 @@ public class VeiculosAbastecimentoAdapter extends ArrayAdapter<Veiculo> {
 
 
         //Colocando a imagem como Picasso
-        String url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+ veiculo.getFoto();
+        String url = "http://10.0.0.104/portal/"+ veiculo.getFoto();
         Picasso.with(getContext()).load(url).into(imgCarro);
 
         txtModelo.setText(veiculo.getModelo());

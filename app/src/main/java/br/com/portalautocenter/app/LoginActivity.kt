@@ -9,10 +9,12 @@ import android.util.Log
 import android.view.MenuItem
 import br.com.portalautocenter.models.Usuario
 import br.com.portalautocenter.utils.HttpConnection
+import br.com.portalautocenter.utils.api
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import org.json.JSONArray
 import org.json.JSONObject
 
 
@@ -33,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             val senha = txt_senha.text.toString()
 
             doAsync {
-                val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/login.php"
+                val url = api + "api/usuario/login.php"
 
                 val map:HashMap<String, String> = hashMapOf("usuario" to usuario, "senha" to senha)
 
@@ -46,8 +48,10 @@ class LoginActivity : AppCompatActivity() {
                     val login_state = retorno.getBoolean("sucesso")
                     if (login_state == true){
                         val usuario = retorno.getJSONObject("usuario")
+                        val carrinhoArray:JSONArray = JSONArray()
                         preferences.edit().putString("USUARIO", usuario.toString()).apply()
                         preferences.edit().putBoolean("STATUS", true).apply()
+                        preferences.edit().putString("CARRINHO", carrinhoArray.toString()).apply()
                         finish()
                     }else{
                         limparTextos()

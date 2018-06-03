@@ -36,6 +36,7 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
         View v = convertView;
 
         if (v == null){
+//            v = LayoutInflater.from(getContext()).inflate(R.layout.list_produtos, null);
             v = LayoutInflater.from(getContext()).inflate(R.layout.list_produtos, null);
         }
         //Pega o produto de determinada posição na lista
@@ -53,7 +54,7 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
         ImageView imgProduto = (ImageView)v.findViewById(R.id.imagem_produto);
 
         //Colocando a imagem como Picasso
-        String url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/cms/"+produto.getImagem();
+        String url = "http://10.0.0.104/portal/cms/" + produto.getImagem();
         Picasso.with(getContext()).load(url).into(imgProduto);
 
         txtProduto.setText(produto.getNome());

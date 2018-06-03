@@ -11,6 +11,7 @@ import br.com.portalautocenter.adapters.VeiculosAbastecimentoAdapter
 import br.com.portalautocenter.models.Produto
 import br.com.portalautocenter.models.Veiculo
 import br.com.portalautocenter.utils.HttpConnection
+import br.com.portalautocenter.utils.api
 
 import kotlinx.android.synthetic.main.activity_carros_abastecimento.*
 import kotlinx.android.synthetic.main.content_carros_abastecimento.*
@@ -39,7 +40,7 @@ class CarrosAbastecimentoActivity : AppCompatActivity() {
 
         doAsync {
             val listVeiculos = ArrayList<Veiculo>()
-            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" +
+            val jsonReturn = HttpConnection.get(api+"api/veiculos/selecionar.php?idUsuario=" +
                     "${id.getInt("idUsuario")}")
 
             Log.d("TAG", jsonReturn)

@@ -11,6 +11,7 @@ import br.com.portalautocenter.adapters.VeiculosAdapter
 import br.com.portalautocenter.models.Produto
 import br.com.portalautocenter.models.Veiculo
 import br.com.portalautocenter.utils.HttpConnection
+import br.com.portalautocenter.utils.api
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_perfil.*
 import org.jetbrains.anko.doAsync
@@ -83,12 +84,12 @@ class PerfilActivity : AppCompatActivity() {
         txt_email.setText(usuario.getString("email"))
         txt_usuario.setText(usuario.getString("usuario"))
         idUsuario = usuario.getInt("idUsuario")
-        val url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
+        val url = api + usuario.getString("fotoUser")
         Picasso.with(applicationContext).load(url).into(profile_image)
 
         doAsync {
             val listVeiculos = ArrayList<Veiculo>()
-            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/veiculos/selecionar.php?idUsuario=" + idUsuario)
+            val jsonReturn = HttpConnection.get(api + "api/veiculos/selecionar.php?idUsuario=" + idUsuario)
 
             Log.d("TAG", jsonReturn)
 

@@ -80,6 +80,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.portalautocenter.app.MainActivity" />
         </activity>
+        <activity
+            android:name=".CarrinhoActivity"
+            android:label="@string/title_activity_carrinho"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.portalautocenter.app.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

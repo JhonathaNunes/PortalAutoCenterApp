@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat
 import android.widget.DatePicker
 import android.widget.TextView
 import br.com.portalautocenter.utils.converteData
+import br.com.portalautocenter.utils.api
 import com.squareup.picasso.Picasso
 
 class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
@@ -83,7 +84,7 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
 
                     doAsync {
 //                        val url ="http://www.i9autocenter/api/usuario/editar.php"
-                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/editar.php"
+                        val url = api + "api/usuario/editar.php"
 
                         val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
                                 "usuario" to usuario, "dtNasc" to dtNasc, "idUsuario" to idUsuario.toString())
@@ -105,7 +106,7 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
 
                 }else{
                     doAsync {
-                        val url ="http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/usuario/inserir.php"
+                        val url = api + "api/usuario/inserir.php"
 
                         val map:HashMap<String, String> = hashMapOf("nome" to nome, "cpf" to cpf, "email" to email,
                                 "usuario" to usuario, "senha" to senha, "dtNasc" to dtNasc)
@@ -218,7 +219,7 @@ class CadastroUsuarioActivity : AppCompatActivity(), View.OnClickListener {
         txt_email.setText(usuario.getString("email"))
         txt_data.setText(converteData(usuario.getString("dtNasc")))
         txt_usuario.setText(usuario.getString("usuario"))
-        val url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/"+usuario.getString("fotoUser")
+        val url = api+usuario.getString("fotoUser")
         Picasso.with(applicationContext).load(url).into(profile_image)
     }
 }

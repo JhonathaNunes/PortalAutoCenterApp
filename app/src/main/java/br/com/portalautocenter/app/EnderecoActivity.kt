@@ -9,6 +9,7 @@ import br.com.portalautocenter.adapters.EnderecoAdapter
 import br.com.portalautocenter.models.Endereco
 import br.com.portalautocenter.models.Produto
 import br.com.portalautocenter.utils.HttpConnection
+import br.com.portalautocenter.utils.api
 
 import kotlinx.android.synthetic.main.activity_endereco.*
 import kotlinx.android.synthetic.main.content_endereco.*
@@ -46,7 +47,7 @@ class EnderecoActivity : AppCompatActivity() {
 
         doAsync {
             var lstEnderecos:ArrayList<Endereco> = ArrayList<Endereco>()
-            val jsonReturn = HttpConnection.get("http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/api/endereco/select.php?idUsuario=$idUsuario")
+            val jsonReturn = HttpConnection.get(api+"api/endereco/select.php?idUsuario=$idUsuario")
             Log.d("TAG", jsonReturn)
 
             try{

@@ -60,7 +60,7 @@ public class ProdutosDestaqueAdapter extends PagerAdapter {
         txtDesc.setText(p.getDescricao());
         txtNome.setText(p.getNome());
         txtPreco.setText(preco);
-        String url = "http://10.107.144.17/inf4m/PortalAutoCenter/TCCPortalAutoCenter/cms/"+p.getImagem();
+        String url = "http://10.0.0.104/portal/cms/"+p.getImagem();
         Picasso.with(aContext).load(url).into(imageView);
 
 
