@@ -30,15 +30,22 @@ class CarrinhoActivity : AppCompatActivity() {
 
         var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
 
-        val adapter = ProdutoAdapter(applicationContext, lstProdutos)
+        val adapter = ProdutoAdapter(applicationContext, ArrayList<Produto>())
+
+        list.adapter = adapter
 
         val preference = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
 
-        val jsonArray = JSONArray(preference.getString("CARRINHO", "[]"))
         val user = JSONObject(preference.getString("USUARIO", "[]"))
         val idUsuario = user.getInt("idUsuario")
-        for (i in 0..jsonArray.length() step 1) run {
-            val p: Produto = Produto(jsonArray.getJSONObject(i).getInt("idProduto"), jsonArray.getJSONObject(i).getString("nome"),
+
+        val jsonArray = JSONArray(preference.getString("CARRINHO", "[]"))
+        Log.e("TAG", jsonArray.toString())
+
+        val tamanho = jsonArray.length()
+
+        for (i in 0..tamanho-1 step 1) run {
+            val p: Produto = Produto(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("nome"),
                     jsonArray.getJSONObject(i).getDouble("preco"), jsonArray.getJSONObject(i).getString("descricao"),
                     jsonArray.getJSONObject(i).getInt("idFilial"), jsonArray.getJSONObject(i).getString("imagem"),
                     jsonArray.getJSONObject(i).getString("marca"), jsonArray.getJSONObject(i).getString("fabricante"),
@@ -47,7 +54,7 @@ class CarrinhoActivity : AppCompatActivity() {
             lstProdutos.add(p)
         }
 
-        list.adapter = adapter
+        adapter.addAll(lstProdutos)
 
         btn_finaliza.setOnClickListener {
             doAsync {

@@ -224,6 +224,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val adapterProduto = ProdutoAdapter(context, ArrayList<Produto>());
                 rootView = inflater.inflate(R.layout.fragment_produtos, container, false)
                 rootView.list_produtos.adapter = adapterProduto
+                rootView.btn_compra.setOnClickListener {
+                    startActivity(Intent(context, CarrinhoActivity::class.java))
+                }
 
                 doAsync {
                     var lstProdutos:ArrayList<Produto> = ArrayList<Produto>()
