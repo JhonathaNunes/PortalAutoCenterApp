@@ -1,6 +1,7 @@
 package br.com.portalautocenter.app
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -21,6 +22,8 @@ import java.util.HashMap
 
 class CarrinhoActivity : AppCompatActivity() {
 
+    var idUsuario = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrinho)
@@ -37,7 +40,7 @@ class CarrinhoActivity : AppCompatActivity() {
         val preference = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
 
         val user = JSONObject(preference.getString("USUARIO", "[]"))
-        val idUsuario = user.getInt("idUsuario")
+        idUsuario = user.getInt("idUsuario")
 
         val jsonArray = JSONArray(preference.getString("CARRINHO", "[]"))
         Log.e("TAG", jsonArray.toString())
@@ -57,25 +60,23 @@ class CarrinhoActivity : AppCompatActivity() {
         adapter.addAll(lstProdutos)
 
         btn_finaliza.setOnClickListener {
-            doAsync {
-                val url = api + "api/usuario/inserir.php"
 
-                val map: HashMap<String, String> = hashMapOf("pedido" to jsonArray.toString(), "idUsuario" to idUsuario.toString())
-
-                val resultado = HttpConnection.post(url, map)
-                Log.d("TAG", resultado)
-
-                uiThread {
-                    val retorno = JSONObject(resultado)
-                    val resultado = retorno.getBoolean("sucesso")
-                    if (resultado == true){
-                        toast("Usuário cadastrado!")
-                        finish()
-                    }else{
-                        toast("Usuario não cadastrado")
-                    }
-                }
-            }
+            val intent = Intent(applicationContext, EnderecoActivity::class.java)
+            intent.putExtra("Compra", true)
+            intent.putExtra("idUsuario", idUsuario)
+            startActivity(intent)
+//            doAsync {
+//                val url = api + "api/produtos/finalizarPedido.php"
+//
+//                val map: HashMap<String, String> = hashMapOf("pedido" to jsonArray.toString(), "idUsuario" to idUsuario.toString())
+//
+//                val resultado = HttpConnection.post(url, map)
+//                Log.d("TAG", resultado)
+//
+//                uiThread {
+//                    toast("Compra efetuada com sucesso! Aguarde a resposta da filial!")
+//                }
+//            }
         }
 
 

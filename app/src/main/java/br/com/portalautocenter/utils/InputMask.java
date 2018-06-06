@@ -17,6 +17,7 @@ public abstract class InputMask {
     public static final String FORMAT_DATE = "##/##/####";
     public static final String FORMAT_HOUR = "##:##";
     public static final String FORMAT_NUMBER = "###,##";
+    public static final String CREDIT_CARD = "#### #### #### ####";
 
     /**
      * Método que deve ser chamado para realizar a formatação

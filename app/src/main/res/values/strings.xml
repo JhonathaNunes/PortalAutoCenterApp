@@ -37,4 +37,5 @@
     <string name="title_activity_insert_endereco">Gerenciar Endereço</string>
     <string name="title_activity_detalhe_produto">Detalhes Produto</string>
     <string name="title_activity_carrinho">Carrinho de Compras</string>
+    <string name="title_activity_pagamento">Confirmar Pagamento</string>
 </resources>

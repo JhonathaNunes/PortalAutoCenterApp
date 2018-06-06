@@ -21,6 +21,7 @@ import org.json.JSONArray
 class EnderecoActivity : AppCompatActivity() {
 
     var idUsuario = 0
+    var booleanCompra = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,10 @@ class EnderecoActivity : AppCompatActivity() {
         var intent = intent
         intent.putExtra("modo", "insert")
         idUsuario = intent.getIntExtra("idUsuario", 0)
+
+        var compra = getIntent()
+        booleanCompra = compra.getBooleanExtra("Compra", false)
+        idUsuario = compra.getIntExtra("idUsuario", 0)
 
         fab.setOnClickListener { view ->
             var intent = Intent(applicationContext, InsertEnderecoActivity::class.java)
@@ -71,10 +76,19 @@ class EnderecoActivity : AppCompatActivity() {
 
 
         list_enderecos.setOnItemClickListener { adapterView, view, i, l ->
-            var intent = Intent(applicationContext, InsertEnderecoActivity::class.java)
+            var intent = Intent()
 
-            intent.putExtra("modo", "edit")
-            intent.putExtra("endereco", adapterEndereco.getItem(i))
+            if (!booleanCompra){
+                intent = Intent(applicationContext, InsertEnderecoActivity::class.java)
+
+                intent.putExtra("modo", "edit")
+                intent.putExtra("endereco", adapterEndereco.getItem(i))
+            }else{
+                intent = Intent(applicationContext, PagamentoActivity::class.java)
+
+                intent.putExtra("idUsuario", idUsuario)
+                intent.putExtra("Endereco", adapterEndereco.getItem(i).idEnderecoUsuario)
+            }
 
             startActivity(intent)
         }
