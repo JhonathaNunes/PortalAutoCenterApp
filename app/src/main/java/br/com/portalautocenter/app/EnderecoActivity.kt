@@ -34,6 +34,7 @@ class EnderecoActivity : AppCompatActivity() {
 
         var compra = getIntent()
         booleanCompra = compra.getBooleanExtra("Compra", false)
+
         idUsuario = compra.getIntExtra("idUsuario", 0)
 
         fab.setOnClickListener { view ->
@@ -88,6 +89,8 @@ class EnderecoActivity : AppCompatActivity() {
 
                 intent.putExtra("idUsuario", idUsuario)
                 intent.putExtra("Endereco", adapterEndereco.getItem(i).idEnderecoUsuario)
+
+                finish()
             }
 
             startActivity(intent)

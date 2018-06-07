@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_exemplo"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:background="@color/colorAccent"/>
+    
+    <TextView
+        android:id="@+id/txt_endereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="R. das Oliveiras do Norte, 409. Cotia - SP"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="#000"/>
+
+    <RatingBar
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="4"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

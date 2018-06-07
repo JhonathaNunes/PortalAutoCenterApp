@@ -14,7 +14,8 @@
             android:layout_weight="4"
             android:textAlignment="center"
             android:text="@string/logradouro"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="#000"/>
 
         <TextView
             android:id="@+id/txt_numero"
@@ -23,7 +24,8 @@
             android:layout_weight="1"
             android:textAlignment="center"
             android:text="@string/num"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="#000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -36,20 +38,23 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/cep"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="#000"/>
         <TextView
             android:id="@+id/txt_bairro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="@string/bairro"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="#000"/>
         <TextView
             android:id="@+id/txt_tpEndereco"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/tpEndereco"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="#000"/>
     </LinearLayout>
 </LinearLayout>

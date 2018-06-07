@@ -38,4 +38,6 @@
     <string name="title_activity_detalhe_produto">Detalhes Produto</string>
     <string name="title_activity_carrinho">Carrinho de Compras</string>
     <string name="title_activity_pagamento">Confirmar Pagamento</string>
+    <string name="title_activity_servico">ServicoActivity</string>
+    <string name="title_activity_pedidos">Pedidos</string>
 </resources>

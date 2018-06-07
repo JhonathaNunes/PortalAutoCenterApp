@@ -9,24 +9,96 @@
     tools:context="br.com.portalautocenter.app.PagamentoActivity"
     tools:showIn="@layout/activity_pagamento" android:padding="16dp">
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Número do Cartão"/>
+        android:text="Selecionar Bandeira"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:checked="true" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:src="@drawable/visa"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="70dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:checked="false" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/master"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dados do Cartão"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
 
     <EditText
+        android:id="@+id/txt_cartao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Número do Cartão"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/txt_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nome (Como impresso no cartão)"/>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Validade"/>
+        android:orientation="horizontal">
 
-    <EditText
+        <EditText
+            android:id="@+id/txt_validade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Validade"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/txt_cvv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="CVV"
+            android:layout_weight="1"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_finaliza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="CVV"/>
+        android:text="Finalizar Compra"
+        android:background="@color/colorAccent"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>

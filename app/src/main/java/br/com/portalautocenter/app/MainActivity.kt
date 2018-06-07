@@ -17,6 +17,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import br.com.portalautocenter.adapters.ProdutoAdapter
 import br.com.portalautocenter.adapters.ServicoAdapter
 import br.com.portalautocenter.models.Produto
@@ -36,6 +37,7 @@ import br.com.portalautocenter.adapters.ProdutosDestaqueAdapter
 import br.com.portalautocenter.models.Prestadora
 import br.com.portalautocenter.utils.api
 import kotlinx.android.synthetic.main.fragment_main.view.*
+import kotlinx.android.synthetic.main.fragment_produtos.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
@@ -111,10 +113,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.nav_pedidos -> {
-
+                val intent = Intent(applicationContext, PedidosActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_carrinho -> {
-
+                startActivity(Intent(applicationContext, CarrinhoActivity::class.java))
             }
             R.id.nav_logout -> {
                 deletarSharedPreferences()
@@ -224,6 +227,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val adapterProduto = ProdutoAdapter(context, ArrayList<Produto>());
                 rootView = inflater.inflate(R.layout.fragment_produtos, container, false)
                 rootView.list_produtos.adapter = adapterProduto
+
                 rootView.btn_compra.setOnClickListener {
                     startActivity(Intent(context, CarrinhoActivity::class.java))
                 }
@@ -292,6 +296,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     uiThread {
                         adapterServico.addAll(lstServico)
                     }
+                }
+
+                rootView.list_servicos.setOnItemClickListener { adapterView, view, i, l ->
+                    val intent = Intent(context, ServicoActivity::class.java)
+                    intent.putExtra("idServico", adapterServico.getItem(i).id)
+                    startActivity(intent)
                 }
             }
 

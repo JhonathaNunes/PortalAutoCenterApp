@@ -1,5 +1,6 @@
 package br.com.portalautocenter.app
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,8 @@ import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -29,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
 
-
         btn_login.setOnClickListener {
+
             val usuario = txt_usuario.text.toString()
             val senha = txt_senha.text.toString()
 

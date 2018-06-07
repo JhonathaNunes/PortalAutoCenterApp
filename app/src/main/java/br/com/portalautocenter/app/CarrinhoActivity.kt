@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.portalautocenter.adapters.ProdutoAdapter
@@ -28,6 +29,25 @@ class CarrinhoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrinho)
         setSupportActionBar(toolbar)
+
+        val pref = getSharedPreferences("LOGADO", Context.MODE_PRIVATE)
+
+        if (pref.getBoolean("STATUS", false) == false){
+            AlertDialog.Builder(this)
+                    .setCancelable(true)
+                    .setTitle("Ação não disponível")
+                    .setMessage("Você precisa estar logado para adcionar um produto ao carrinho.\n" +
+                            "Deseja fazer o login?")
+                    .setNegativeButton("Não", { dialogInterface, i ->
+                        finish()
+                    })
+                    .setPositiveButton("Sim", { dialogInterface, i ->
+                        var intent = Intent(applicationContext, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }).show()
+            finish()
+        }
 
         val list = list_compras
 
@@ -64,23 +84,10 @@ class CarrinhoActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, EnderecoActivity::class.java)
             intent.putExtra("Compra", true)
             intent.putExtra("idUsuario", idUsuario)
+            finish()
             startActivity(intent)
-//            doAsync {
-//                val url = api + "api/produtos/finalizarPedido.php"
-//
-//                val map: HashMap<String, String> = hashMapOf("pedido" to jsonArray.toString(), "idUsuario" to idUsuario.toString())
-//
-//                val resultado = HttpConnection.post(url, map)
-//                Log.d("TAG", resultado)
-//
-//                uiThread {
-//                    toast("Compra efetuada com sucesso! Aguarde a resposta da filial!")
-//                }
-//            }
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
 }
